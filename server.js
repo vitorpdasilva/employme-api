@@ -6,7 +6,8 @@ const resolvers = require('./resolvers');
 const { findOrCreateUser } = require('./controllers/userController');
 require('dotenv').config();
 
-const uri = "mongodb+srv://employme:vitor123@cluster0.b6tyi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const uri = "mongodb+srv://employme:vitor123@cluster0.b6tyi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = 'mongodb+srv://vitorboccio:Vitor.123@cluster0.0duim.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
