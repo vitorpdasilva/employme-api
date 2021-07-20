@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const JobsSchema = new Schema({
-  id: { type: String, unique: true },
+  id: { type: Number, unique: true },
   recent: Boolean,
   createdAt: { type: Number, default: Date.now / 1000 },
   title: String, 
