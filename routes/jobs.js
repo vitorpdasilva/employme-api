@@ -4,11 +4,9 @@ const Job = require('../models/Jobs');
 router.route('/jobs')
   .get(function (req, res) {
     Job.find({ id: 0 }, (err, job) => {
-      console.log({ job });
       res.json({
         message: 'success',
         job,
-        err,
       })
     })
   })
