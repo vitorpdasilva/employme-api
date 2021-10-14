@@ -9,6 +9,7 @@ const cors = require("cors");
 
 const jobRoutes = require('./routes/jobs');
 const skillListRoute = require('./routes/skillList');
+const userRoute = require('./routes/user');
 const app = express();
 
 mongoose.connect(uri, {
@@ -24,5 +25,6 @@ app.use(cors());
 
 app.use('/api', jobRoutes);
 app.use('/api', skillListRoute);
+app.use('/api', userRoute);
 
 app.listen(3001, () => console.log('server running port 3001'));

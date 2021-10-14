@@ -10,9 +10,12 @@ router.route('/jobs')
       })
     })
   })
-  .post((req, res) => {
+  .post(async (req, res) => {
+    console.log({ req });
+    const jobs = await Job.find();
     res.json({
-      message: 'post /jobs'
+      jobs,
+      message: 'jobs post success',
     })
   });
 
