@@ -11,7 +11,7 @@ router.route('/jobs')
     })
   })
   .post(async (req, res) => {
-    console.log({ req });
+    console.log({ req: req.body });
     const jobs = await Job.find();
     res.json({
       jobs,

@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const AuthRegisterSchema = new mongoose.Schema({
   username: String,
   password: String,
-  firstName: String,
-  lastName: String,
+  name: String,
 });
 
 const AuthLoginSchema = new mongoose.Schema({
@@ -12,5 +11,5 @@ const AuthLoginSchema = new mongoose.Schema({
   password: String,
 });
 
-module.exports = mongoose.model('AuthRegister', AuthRegisterSchema);
+module.exports = mongoose.model('AuthRegister', AuthRegisterSchema, "users");
 module.exports = mongoose.model('AuthLogin', AuthLoginSchema);

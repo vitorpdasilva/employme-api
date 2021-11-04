@@ -18,6 +18,8 @@ mongoose.connect(uri, {
 .then(() => console.log(chalk.green('db connect')))
 .catch((err) => console.error(chalk.red(err)));
 
+mongoose.set('debug', true);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
