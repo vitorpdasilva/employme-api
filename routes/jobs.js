@@ -15,7 +15,6 @@ router.route('/jobs')
     const jobs = await Job.find();
     res.json({
       jobs,
-      message: 'jobs post success',
     })
   });
 
