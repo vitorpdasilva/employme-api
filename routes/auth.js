@@ -1,17 +1,22 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const chalk = require('chalk');
-const User = require('../models/User');
 const { v4: uuidv4 } = require('uuid');
-router.route('/login')
-  .post(async (req, res) => {
-    console.log({ req });
-    try {
-      
-    } catch {
+const passport = require('passport');
+const User = require('../models/User');
 
+router.route('/login')
+.post(async (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ username }, async (err, user) => {
+    console.log({ password, user });
+    const match = await bcrypt.compare(password, user.passwordHash);
+    if (match) {
+      console.log(chalk.green('ok logged in'));
     }
-  });
+  })
+
+})
 
 router.route('/register')
   .post(async (req, res) => {
