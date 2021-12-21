@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const JobsSchema = new Schema({
   id: { type: Number, unique: true },
+  applicants: [Number],
   recent: Boolean,
   createdAt: { type: Number, default: Date.now / 1000 },
-  title: String, 
+  title: String,
   location: {
     city: String,
     country: String,

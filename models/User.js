@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
   picture: String,
   passwordHash: String,
   id: { type: String, unique: true },
+  accessCount: Number,
   general: {
     citizenship_code: String,
     gender: String,

@@ -1,18 +1,9 @@
 const router = require('express').Router();
-const Job = require('../models/Jobs');
+const Jobs = require('../models/Jobs');
 
 router.route('/jobs')
-  .get(function (req, res) {
-    Job.find({ id: 0 }, (err, job) => {
-      res.json({
-        message: 'success',
-        job,
-      })
-    })
-  })
   .post(async (req, res) => {
-    console.log({ req: req.body });
-    const jobs = await Job.find();
+    const jobs = await Jobs.find();
     res.json({
       jobs,
     })

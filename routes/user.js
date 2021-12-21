@@ -3,11 +3,9 @@ const User = require('../models/User');
 
 router.route('/user')
   .post(async(req, res) => {
-    console.log({ req });
-    const user = await User.find();
+    const user = await User.findOne({ username: req.body.username });
     console.log({ user });
     res.json({
-      message: 'test success',
       user
     })
   })

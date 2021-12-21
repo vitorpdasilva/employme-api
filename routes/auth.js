@@ -1,18 +1,19 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-const chalk = require('chalk');
 const { v4: uuidv4 } = require('uuid');
-const passport = require('passport');
 const User = require('../models/User');
 
 router.route('/login')
 .post(async (req, res) => {
   const { username, password } = req.body;
   User.findOne({ username }, async (err, user) => {
-    console.log({ password, user });
     const match = await bcrypt.compare(password, user.passwordHash);
     if (match) {
-      console.log(chalk.green('ok logged in'));
+      User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 });
+      res.json({
+        user,
+        message: 'success',
+      })
     }
   })
 
@@ -21,19 +22,22 @@ router.route('/login')
 router.route('/register')
   .post(async (req, res) => {
     const { username, password, name } = req.body;
-    console.log(req.body);
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
       const userData = { 
-        username, 
+        username,
+        accessCount: 0, 
         passwordHash: hashedPassword, 
         name,
         id: uuidv4(), 
       };
-      new User(userData).save();
+
+      const user = await User(userData).save();
+      delete user.passwordHash;
       res.json({
-        message: 'user saved',
-      });
+        message: 'User saved',
+        user
+      })
       
     } catch(err) {
       res.status(400);
