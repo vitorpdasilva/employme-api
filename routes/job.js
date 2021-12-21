@@ -5,14 +5,19 @@ router.route('/job/:id/apply')
   .post(async (req, res) => {
     console.log({ req: req.body });
 
-    await Job.findOne({ id: req.params.id }).updateOne({
+    const { nModified } = await Job.findOne({ id: req.params.id }).updateOne({
       $addToSet: { applicants: req.body.applicantId },
-    })
-
-    res.json({
-      status: 'success',
-      message: 'Application sucessful',
     });
+
+    if (nModified === 0) {
+      res.send({ error: 'User has already applied for this position' });
+    } else {
+      res.json({
+        status: 'success',
+        message: 'Application sucessful',
+      });
+    }
+    
   });
 
 router.route('/job/:id')
