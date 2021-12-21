@@ -5,8 +5,9 @@ const User = require('../models/User');
 
 router.route('/login')
 .post(async (req, res) => {
-  const { username, password } = req.body;
-  User.findOne({ username }, async (err, user) => {
+  const { username, password, email } = req.body;
+  console.log({ username, password, email });
+  User.findOne({ email  }, async (err, user) => {
     const match = await bcrypt.compare(password, user.passwordHash);
     if (match) {
       User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 });
