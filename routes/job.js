@@ -3,9 +3,15 @@ const Job = require('../models/Jobs');
 
 router.route('/job/:id/apply')
   .post(async (req, res) => {
-    console.log({ req: req });
+    console.log({ req: req.body });
+
+    await Job.findOne({ id: req.params.id }).updateOne({
+      $addToSet: { applicants: req.body.applicantId },
+    })
+
     res.json({
-      message: `ok got it, ${JSON.stringify(req.body)}`,
+      status: 'success',
+      message: 'Application sucessful',
     });
   });
 
