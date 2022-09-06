@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   passwordHash: String,
   id: { type: String, unique: true },
   accessCount: Number,
+  jobsApplied: [Number],
   general: {
     citizenship_code: String,
     gender: String,
