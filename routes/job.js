@@ -10,7 +10,10 @@ router.route('/job/:id/apply')
     });
 
     if (nModified === 0) {
-      res.send({ error: 'User has already applied for this position' });
+      res.json({
+        status: 'error',
+        message: 'User has already applied for this position',
+      })
     } else {
       res.json({
         status: 'success',
@@ -22,7 +25,7 @@ router.route('/job/:id/apply')
 
 router.route('/job/:id')
   .post(async (req, res) => {
-    const job = await Job.findOne({ id: req.params.id });
+    const job = await Job.findOne({ id: req.params.id }, { applicants: 0 });
     res.json(
       job,
     )
