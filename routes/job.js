@@ -16,12 +16,12 @@ router.route('/job/:id/apply')
       })
     }
 
-    const { nModified: nUserModified} = await User.updateOne({ id: req.body.applicantId }, {
-       jobsApplied: req.params.id 
-    })
+    const userUpdate = await User.findOneAndUpdate(
+      { id: req.body.applicantId},
+      { $push: { jobsApplied: req.params.id } }
+    )
 
-
-    if (nUserModified !== 0) {
+    if (userUpdate) {
       res.json({
         status: 'success',
         message: 'Application sucessful',
