@@ -4,16 +4,10 @@ const User = require('../models/User')
 
 router.route('/job/:id/apply')
   .post(async (req, res) => {
-    console.log({ req: req.body, params: req.params, type: typeof req.params.id });
-
-    // const { nModified } = await Job.updateOne({ id: Number(req.params.id) }, {
-    //   applicants: req.body.applicantId 
-    // });
-    const { nModified } = await Job.updateOne({ id: Number(req.params.id) }, {
-      $push: { applicants: req.body.applicantId }
-    });
     
-    console.log({ nModified })
+    const { nModified } = await Job.updateOne({ id: req.params.id }, {
+      applicants: req.body.applicantId 
+    });
     
     if (nModified === 0) {
       return res.json({
@@ -21,22 +15,23 @@ router.route('/job/:id/apply')
         message: 'User has already applied for this position',
       })
     }
-    const userUpdate = await User.findOneAndUpdate({ id: req.body.applicantId }, {
-      $push: { appliedIds: req.params.id } 
+
+    const { nModified: nUserModified} = await User.updateOne({ id: req.body.applicantId }, {
+       jobsApplied: req.params.id 
     })
 
-    console.log({ userUpdate })
 
-    if (userUpdate) {
+    if (nUserModified !== 0) {
       res.json({
         status: 'success',
         message: 'Application sucessful',
       });
+    } else {
+      res.json({
+        status: 'error',
+        message: 'User not found',
+      });
     }
-    
-     
-    
-    
   });
 
 router.route('/job/:id')
