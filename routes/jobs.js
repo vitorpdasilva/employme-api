@@ -12,7 +12,7 @@ router.route('/jobs')
     const { title, location, locationType, salary } = req;
     console.log({ req, res })
     if (!title || !location || !locationType || !salary) {
-      res.status(500).send('Some field wasnt provided')
+      res.status(500).send('One of the required fields is missing');
     }
   })
   ;

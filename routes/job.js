@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Job = require('../models/Jobs');
 const User = require('../models/User')
+const { responseStatus } = require('../constants');
 
 router.route('/job/:id/apply')
   .post(async (req, res) => {
@@ -11,7 +12,7 @@ router.route('/job/:id/apply')
     
     if (nModified === 0) {
       return res.json({
-        status: 'error',
+        status: responseStatus.error,
         message: 'User has already applied for this position',
       })
     }
@@ -23,12 +24,12 @@ router.route('/job/:id/apply')
 
     if (userUpdate) {
       res.json({
-        status: 'success',
+        status: responseStatus.success,
         message: 'Application sucessful',
       });
     } else {
       res.json({
-        status: 'error',
+        status: responseStatus.error,
         message: 'User not found',
       });
     }
