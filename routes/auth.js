@@ -9,6 +9,12 @@ router.route('/login')
   const { password, email } = req.body;
   console.log({ password, email });
   User.findOne({ email }, async (err, user) => {
+    if (!user) {
+      return res.status(responseStatus.notFound).json({
+        status: responseStatus.notFound,
+        message: 'Invalid user or password'
+      })
+    }
     bcrypt.compare(password, user.passwordHash, (err, isMatch) => {
       console.log({ err, isMatch })
       if (isMatch) {
@@ -20,7 +26,7 @@ router.route('/login')
         });
       } else {
         res.json({
-          status: responseStatus.error,
+          status: responseStatus.notFound,
           message: 'Invalid credentials',
         });
       }
