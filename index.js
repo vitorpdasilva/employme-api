@@ -1,5 +1,3 @@
-const uri = "mongodb+srv://employme:vitor123@cluster0.b6tyi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
 const chalk = require('chalk');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -15,10 +13,11 @@ const skillListRoute = require('./routes/skillList');
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth');
 
-
 const User = require('./models/User');
-
 const initializePassport = require('./passport-config');
+
+const email = 'test@test.com'
+
 
 initializePassport(
   passport,
