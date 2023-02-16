@@ -21,13 +21,13 @@ const User = require('./models/User');
 const initializePassport = require('./passport-config');
 
 initializePassport(
-  passport, 
+  passport,
   async () => await User.findOne({ username: email }),
 );
 
 // mongoose & express config
 const app = express();
-mongoose.connect(uri, {
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
 })
 .then(() => console.log(chalk.green('db connect')))
