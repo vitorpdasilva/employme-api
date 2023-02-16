@@ -6,7 +6,7 @@ const cors = require("cors");
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
-
+const dotenv = require('dotenv')
 const jobsRoutes = require('./routes/jobs');
 const jobRoutes = require('./routes/job');
 const skillListRoute = require('./routes/skillList');
@@ -16,8 +16,8 @@ const authRoute = require('./routes/auth');
 const User = require('./models/User');
 const initializePassport = require('./passport-config');
 
+dotenv.config()
 const email = 'test@test.com'
-
 
 initializePassport(
   passport,
