@@ -18,11 +18,12 @@ const initializePassport = require('./passport-config');
 
 dotenv.config()
 
+
 console.log({ DB_URL: process.env.DB_URL })
 
 initializePassport(
   passport,
-  async () => await User.findOne({ username: email }),
+  async () => await User.findOne({ username: 'vitorboccio' }),
 );
 
 // mongoose & express config

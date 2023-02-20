@@ -8,51 +8,60 @@ const jwt = require('jsonwebtoken')
 router.route('/login')
 .post(async (req, res) => {
   const { password, email } = req.body;
-  console.log({ password, email });
-  User.findOne({ email }, async (err, user) => {
-    if (!user) {
-      return res.status(responseStatus.notFound).json({
-        status: responseStatus.notFound,
-        message: 'Invalid user or password'
-      })
-    }
-    bcrypt.compare(password, user.passwordHash, (err, isMatch) => {
-      console.log({ err, isMatch })
-      if (isMatch) {
-        User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 })
-        const payload = {
-          userId: user.id,
-          username: user.username,
-        }
-        const secret = "secretKey"
-        const options = { expiresIn: '364d' }
-        const token = jwt.sign(payload, secret, options)
-        res.json({
-          status: responseStatus.success,
-          message: 'Login successful',
-          user,
-          token,
-        });
-      } else {
-        res.json({
+  console.log({ password, email })
+  
+  try {
+    const user = await User.findOne({ email }).exec()
+    console.log({ user })
+      if (!user) {
+        return res.status(responseStatus.notFound).json({
           status: responseStatus.notFound,
-          message: 'Invalid credentials',
-        });
+          message: 'Invalid user or password',
+        })
       }
-    });
-  })
+      bcrypt.compare(password, user.passwordHash, (err, isMatch) => {
+        console.log({ err, isMatch })
+        if (isMatch) {
+          User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 })
+          const payload = {
+            userId: user.id,
+            username: user.username,
+          }
+          const secret = "secretKey"
+          const options = { expiresIn: '364d' }
+          const token = jwt.sign(payload, secret, options)
+          res.json({
+            status: responseStatus.success,
+            message: 'Login successful',
+            user,
+            token,
+          });
+        } else {
+          res.json({
+            status: responseStatus.notFound,
+            message: 'Invalid credentials',
+          });
+        }
+      });
+    
+  } catch(err) {
+    res.status(400);
+    res.json({
+      message: 'Error logging in, try again.',
+      err,
+    })
+  }
 })
 
 router.route('/register')
   .post(async (req, res) => {
-    const { username, password, name } = req.body;
+    const { email, password } = req.body;
     try {
       const hashedPassword = await bcrypt.hash(password, 9);
       const userData = { 
-        username,
+        email,
         accessCount: 0, 
         passwordHash: hashedPassword, 
-        name,
         id: uuidv4(), 
       };
 
