@@ -31,7 +31,7 @@ mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
 })
 .then(() => console.log(chalk.green('db connect')))
-.catch((err) => console.error(chalk.red({ err })));
+.catch((err) => console.error(chalk.red({ err: JSON.stringify(err) })));
 
 mongoose.set('debug', true);
 
