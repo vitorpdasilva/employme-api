@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
     gender: String,
     currentLocation: String,
     phone: String,
+    bio: String,
   },
   professionalOverview: {
     profession: Number,
@@ -23,7 +24,13 @@ const UserSchema = new mongoose.Schema({
     skillRank: [
       { skillId: Number, yearsOfExp: Number },
     ],
+    workExperience: [
+      { title: String, company: String, location: String, startDate: Date, endDate: Date, description: String },
+    ]
   },
+  education: [
+    { school: String, degree: String, fieldOfStudy: String, startDate: Date, endDate: Date, description: String },
+  ],
   relocation: {
     openToRemote: Boolean,
     relocateOptions: String,
