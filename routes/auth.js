@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const User = require('../models/User');
 const { responseStatus } = require('../constants');
-const jwt = require('jsonwebtoken')
-
+const { generateJwtToken } = require('../helpers/generateJwtToken');
 router.route('/login')
 .post(async (req, res) => {
   const { password, email } = req.body;
@@ -23,13 +22,7 @@ router.route('/login')
         console.log({ err, isMatch })
         if (isMatch) {
           User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 })
-          const payload = {
-            userId: user.id,
-            username: user.username,
-          }
-          const secret = "secretKey"
-          const options = { expiresIn: '364d' }
-          const token = jwt.sign(payload, secret, options)
+          const token = generateJwtToken(user)
           res.json({
             status: responseStatus.success,
             message: 'Login successful',
