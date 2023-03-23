@@ -1,9 +1,11 @@
+const chalk = require('chalk')
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const User = require('../models/User');
 const { responseStatus } = require('../constants');
 const { generateJwtToken } = require('../helpers/generateJwtToken');
+
 router.route('/login')
 .post(async (req, res) => {
   const { password, email } = req.body;
@@ -23,6 +25,7 @@ router.route('/login')
         if (isMatch) {
           User.findByIdAndUpdate(user.id, { accessCount: user.accessCount + 1 })
           const token = generateJwtToken(user)
+          console.log(chalk.green("Login successful"))
           res.json({
             status: responseStatus.success,
             message: 'Login successful',
@@ -30,6 +33,7 @@ router.route('/login')
             token,
           });
         } else {
+          console.log(chalk.red("Invalid credentials"))
           res.json({
             status: responseStatus.notFound,
             message: 'Invalid credentials',
@@ -38,6 +42,7 @@ router.route('/login')
       });
     
   } catch(err) {
+    console.log(chalk.red("Error logging in, try again."), err)
     res.status(400);
     res.json({
       message: 'Error logging in, try again.',

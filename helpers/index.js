@@ -1,3 +1,8 @@
-export * from './connectToMongo'
-export * from './generateJwtToken'
-export * from './savePDF'
+
+const { connectToMongoDB } = require('./connectToMongo');
+const { generateJwtToken } = require('./generateJwtToken');
+
+module.exports = {
+  connectToMongoDB,
+  generateJwtToken,
+}

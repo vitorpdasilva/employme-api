@@ -38,11 +38,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes
+app.use('/api', authRoute);
 app.use('/api', jobsRoutes);
 app.use('/api', jobRoutes);
 app.use('/api', skillListRoute);
 app.use('/api', userRoute);
-app.use('/api', authRoute);
 
 //port
 app.listen(3001, () => console.log(chalk.green('server running port 3001')));

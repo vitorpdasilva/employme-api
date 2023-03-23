@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const { MongoClient } = require('mongodb');
 
 async function connectToMongoDB() {
@@ -7,10 +8,10 @@ async function connectToMongoDB() {
   });
   try {
     await client.connect();
-    console.log('Connected to MongoDB successfully');
+    console.log(chalk.green('Connected to MongoDB successfully'));
     return client.db(process.env.DB_NAME);
   } catch (err) {
-    console.error('Error connecting to MongoDB:', err);
+    console.error(chalk.red('Error connecting to MongoDB:', err));
     process.exit(1);
   }
 }
