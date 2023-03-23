@@ -1,7 +1,12 @@
+const dotenv = require('dotenv')
+
 const chalk = require('chalk');
 const { MongoClient } = require('mongodb');
+dotenv.config() 
 
 async function connectToMongoDB() {
+  console.log({ DB_URL: process.env.DB_URL, DB_NAME: process.env.DB_NAME })
+  
   const client = new MongoClient(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

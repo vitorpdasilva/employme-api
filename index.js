@@ -7,10 +7,9 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const dotenv = require('dotenv')
-const { jobRoutes, jobsRoutes, skillListRoute, userRoute, authRoute } = require('./routes');
+const { jobRoutes, jobsRoutes, skillListRoute, userRoute, authRoute } = require('./routes')
 
 dotenv.config()
-
 
 console.log({ DB_URL: process.env.DB_URL })
 
@@ -38,11 +37,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //routes
-app.use('/api', authRoute);
 app.use('/api', jobsRoutes);
 app.use('/api', jobRoutes);
 app.use('/api', skillListRoute);
 app.use('/api', userRoute);
+app.use('/api', authRoute);
 
 //port
 app.listen(3001, () => console.log(chalk.green('server running port 3001')));
