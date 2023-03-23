@@ -7,24 +7,12 @@ const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const dotenv = require('dotenv')
-const jobsRoutes = require('./routes/jobs');
-const jobRoutes = require('./routes/job');
-const skillListRoute = require('./routes/skillList');
-const userRoute = require('./routes/user');
-const authRoute = require('./routes/auth');
-
-const User = require('./models/User');
-const initializePassport = require('./passport-config');
+const { jobRoutes, jobsRoutes, skillListRoute, userRoute, authRoute } = require('./routes');
 
 dotenv.config()
 
 
 console.log({ DB_URL: process.env.DB_URL })
-
-initializePassport(
-  passport,
-  async () => await User.findOne({ username: 'vitorboccio' }),
-);
 
 // mongoose & express config
 const app = express();
