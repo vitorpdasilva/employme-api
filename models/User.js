@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
       { skillId: Number, yearsOfExp: Number },
     ],
     workExperience: [
-      { title: String, company: String, location: String, startDate: Date, endDate: Date, description: String },
+      { id: String, title: String, company: String, location: String, startDate: Date, endDate: Date, description: String },
     ]
   },
   education: [
@@ -44,7 +44,24 @@ const UserSchema = new mongoose.Schema({
   },
   social: [
     { name: String, url: String }
-  ]
+  ],
+  preferences: {
+    jobSearchStatus: [
+      {
+        id: String,
+        label: String,
+      }
+    ],
+    salary: {
+      min: Number,
+      max: Number,
+      currency: String,
+    },
+    companySize: [
+      { id: Number, option: Number, label: String }
+    ],
+    hideFromCompanies: [String],
+  }
 });
 
 module.exports = mongoose.model('User', UserSchema);
