@@ -7,7 +7,6 @@ const UserSchema = new mongoose.Schema({
   picture: String,
   passwordHash: String,
   id: { type: String, unique: true },
-  accessCount: Number,
   jobsApplied: [Number],
   general: {
     citizenship_code: String,
@@ -61,6 +60,21 @@ const UserSchema = new mongoose.Schema({
       { id: Number, option: Number, label: String }
     ],
     hideFromCompanies: [String],
+  },
+  culture: {
+    lookingFor: String,
+    motivation: {
+      value: Number,
+      label: String,
+    },
+    fiveYears: {
+      value: Number,
+      label: String,
+    },
+    environmentType: {
+      value: Number,
+      label: String,
+    }
   }
 });
 
