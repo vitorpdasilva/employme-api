@@ -45,12 +45,10 @@ const UserSchema = new mongoose.Schema({
     { name: String, url: String }
   ],
   preferences: {
-    jobSearchStatus: [
-      {
-        id: String,
-        label: String,
-      }
-    ],
+    jobSearchStatus: {
+      id: String,
+      label: String,
+    },
     salary: {
       min: Number,
       max: Number,
