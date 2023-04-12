@@ -50,9 +50,9 @@ const UserSchema = new mongoose.Schema({
       label: String,
     },
     salary: {
-      min: Number,
-      max: Number,
       currency: String,
+      amount: String,
+      periodicity: String,
     },
     companySize: [
       { id: Number, option: Number, label: String }
