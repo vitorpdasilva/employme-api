@@ -4,7 +4,13 @@ const UserSchema = new mongoose.Schema({
   name: String,
   username: String,
   email: String,
-  picture: String,
+  picture: {
+    filename: String,
+    originalName: String,
+    mimetype: String,
+    size: Number,
+    createdDate: Date,
+  },
   passwordHash: String,
   id: { type: String, unique: true },
   jobsApplied: [Number],
@@ -61,18 +67,9 @@ const UserSchema = new mongoose.Schema({
   },
   culture: {
     lookingFor: String,
-    motivation: {
-      value: Number,
-      label: String,
-    },
-    fiveYears: {
-      value: Number,
-      label: String,
-    },
-    environmentType: {
-      value: Number,
-      label: String,
-    }
+    motivatesMeMore: Number,
+    fiveYearsCareerTrack: Number,
+    workBetterIn: Number,
   }
 });
 
