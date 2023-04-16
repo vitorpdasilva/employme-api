@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   name: String,
   username: String,
-  email: String,
+  email: { type: String, unique: true },
   picture: {
+    data: String,
     filename: String,
     originalName: String,
-    mimetype: String,
     size: Number,
     createdDate: Date,
   },
@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
     gender: String,
     currentLocation: String,
     phone: String,
-    bio: String,
+    bio: String
   },
   professionalOverview: {
     profession: Number,
