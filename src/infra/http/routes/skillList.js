@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const SkillList = require('../models/SkillList');
+const SkillList = require('../../database/models/SkillList');
+
 router.route('/skill-list')
   .post(async(req, res) => {
     const skillList = await SkillList.find();

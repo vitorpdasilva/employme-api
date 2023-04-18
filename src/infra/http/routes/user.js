@@ -1,7 +1,7 @@
 const fs = require('fs')
 const router = require('express').Router();
-const User = require('../models/User');
-const { generateJwtToken } = require('../helpers');
+const User = require('../../database/models/user');
+const { generateJwtToken, upload } = require('../../../common/helpers');
 const { ObjectID } = require('mongodb');
 
 router.route('/user')
@@ -32,18 +32,19 @@ router.route('/user')
     }
   })
   
-router.route('user/save-pdf')
-  .post(async(req, res) => {
+router.route('/user/save-pdf')
+  .post(upload.single('pdf'), async(req, res) => {
     try {
-      const pdfBuffer  = fs.readFileSync(req.body.pdf)
+      const pdfBuffer  = fs.readFileSync(req.file.path);
       const id = new ObjectID()
       const metaData = {
         userId: req.body.userId,
         filename: req.body.filename,
       }
-      console.log({ pdfBuffer, id, metaData })
+      console.log({ pdfBuffer: pdfBuffer.toString('base64'), id, metaData })
     } catch (err) {
       console.error({ err })
     }
+    res.json({ ok: true })
   })
 module.exports = router;

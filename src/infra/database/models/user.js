@@ -70,6 +70,10 @@ const UserSchema = new mongoose.Schema({
     motivatesMeMore: Number,
     fiveYearsCareerTrack: Number,
     workBetterIn: Number,
+  },
+  accessCount: {
+    type: Number,
+    default: 0
   }
 });
 

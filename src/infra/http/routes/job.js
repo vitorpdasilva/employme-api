@@ -1,12 +1,12 @@
-const router = require('express').Router();
-const Job = require('../models/Jobs');
-const User = require('../models/User')
-const { responseStatus } = require('../constants');
+const router = require('express').Router()
+const Jobs = require('../../database/models/Jobs');
+const User = require('../../database/models/user');
 
-router.route('/job/:id/apply')
-  .post(async (req, res) => {
-    
-    const { nModified } = await Job.updateOne({ id: req.params.id }, {
+const { responseStatus } = require('../../../../constants')
+
+router
+  .post('/:id/apply', async (req, res) => {
+    const { nModified } = await Jobs.updateOne({ id: req.params.id }, {
       applicants: req.body.applicantId 
     });
     
@@ -33,14 +33,10 @@ router.route('/job/:id/apply')
         message: 'User not found',
       });
     }
-  });
-
-router.route('/job/:id')
-  .post(async (req, res) => {
-    const job = await Job.findOne({ id: req.params.id }, { applicants: 0 });
-    res.json(
-      job,
-    )
+  })
+  .post('/:id', async (req, res) => {
+    const job = await Jobs.findOne({ id: req.params.id }, { applicants: 0 });
+    res.json(job)
   })
 
 module.exports = router;
