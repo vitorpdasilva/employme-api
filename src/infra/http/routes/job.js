@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Jobs = require('../../database/models/Jobs');
-const User = require('../../database/models/user');
+const User = require('../../database/models/User');
 
 const { responseStatus } = require('../../../../constants')
 

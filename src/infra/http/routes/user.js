@@ -1,6 +1,6 @@
 const fs = require('fs')
 const router = require('express').Router();
-const User = require('../../database/models/user');
+const User = require('../../database/models/User');
 const { generateJwtToken, upload } = require('../../../common/helpers');
 const { ObjectID } = require('mongodb');
 

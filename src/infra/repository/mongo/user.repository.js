@@ -1,5 +1,5 @@
 const User = require('../../../domain/entity/user')
-const UserModel = require('../../database/models/user')
+const UserModel = require('../../database/models/User')
 
 class MongoUserRepository {
 
