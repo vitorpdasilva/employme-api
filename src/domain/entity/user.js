@@ -2,6 +2,7 @@ const PasswordService = require("../../application/services/password")
 
 class User {
   #email = ''
+  #name = ''
   #accessCount = 0
   #passwordHash = ''
   #id = ''
@@ -12,10 +13,9 @@ class User {
   #relocation = {}
   #preferences = {}
   #culture = {}
-  #social = {}
-  #education = {}
+  #social = []
+  #education = []
   #jobsApplied = []
-  #name = ''
 
   constructor(email, id = '') {
     this.#email = email

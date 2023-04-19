@@ -2,7 +2,6 @@ const ErrorUser = require('../errors/ErroUser')
 const JwtService = require('../services/jwt')
 
 async function DoLogin(userRepository, { email, password }) {
-  console.log({ dologin: 'dologin', email, password })
   const user = await userRepository.findOneByEmail(email)
   if (!user) {
     throw ErrorUser.NotFound

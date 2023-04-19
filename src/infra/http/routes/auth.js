@@ -19,9 +19,10 @@ router
     
   })
   .post('/register', async (req, res) => {
-    const { email, password } = req.body
+    const { email, password, name } = req.body
     try {
-      const user = await Register(MongoUserRepository, { email, password})
+      const user = await Register(MongoUserRepository, { email, password, name })
+
       res.json(user)
     } catch(error) {
       console.log('Err', error)
