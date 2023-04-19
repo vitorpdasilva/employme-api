@@ -8,15 +8,27 @@ class MongoUserRepository {
     if (!userDb) {
       return null
     }
+    
     const user = new User(userDb.email)
+    user.name = userDb.name
+    user.username = userDb.username
     user.passwordHash = userDb.passwordHash
     user.id = userDb._id
     user.increaseAccessCount(userDb.accessCount)
+    user.picture = userDb.picture
+    user.general = userDb.general
+    user.professionalOverview = userDb.professionalOverview
+    user.relocation = userDb.relocation
+    user.preferences = userDb.preferences
+    user.culture = userDb.culture
+    user.social = userDb.social
+    user.jobsApplied = userDb.jobsApplied
+    user.education = userDb.education
     return user
   }
 
   static async updateAccessCount(user) {
-    console.log('ID', user.accessCount)
+    console.log({ accessCount: user.accessCount })
     await UserModel.findByIdAndUpdate(user.id, { accessCount: user.accessCount })
   }
 

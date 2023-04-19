@@ -1,7 +1,8 @@
 const ErrorUser = require('../errors/ErroUser')
 const JwtService = require('../services/jwt')
 
-async function DoLogin(userRepository, { email, password}) {
+async function DoLogin(userRepository, { email, password }) {
+  console.log({ dologin: 'dologin', email, password })
   const user = await userRepository.findOneByEmail(email)
   if (!user) {
     throw ErrorUser.NotFound
@@ -13,8 +14,9 @@ async function DoLogin(userRepository, { email, password}) {
   user.increaseAccessCount()
   await userRepository.updateAccessCount(user)
   const token = JwtService.generate(user)
+  
   return {
-    ...user,
+    user: user.toJson(),
     token
   }
 }

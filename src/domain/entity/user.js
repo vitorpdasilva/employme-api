@@ -5,10 +5,22 @@ class User {
   #accessCount = 0
   #passwordHash = ''
   #id = ''
+  #username = ''
+  #picture = ''
+  #general = {}
+  #professionalOverview = {}
+  #relocation = {}
+  #preferences = {}
+  #culture = {}
+  #social = {}
+  #education = {}
+  #jobsApplied = []
+  #name = ''
 
   constructor(email, id = '') {
     this.#email = email
     this.#id = id
+    
   }
 
   async comparePassword(password) {
@@ -34,6 +46,14 @@ class User {
     this.#passwordHash = passwordHash
   }
 
+  set name(name) {
+    this.#name = name
+  }
+
+  set username(username) {
+    this.#username = username
+  }
+
   get passwordHash() {
     return this.#passwordHash
   }
@@ -42,8 +62,48 @@ class User {
     return this.#accessCount
   }
 
-  get email() {
+  get email () {
     return this.#email
+  }
+
+  set email(email) {
+    this.#email = email
+  }
+
+  set picture(picture) {
+    this.#picture = picture
+  }
+
+  set general(param) {
+    this.#general = param
+  }
+
+  set professionalOverview(param) {
+    this.#professionalOverview = param
+  }
+
+  set relocation(param) {
+    this.#relocation = param
+  }
+
+  set preferences(param) {
+    this.#preferences = param
+  }
+
+  set culture(param) {
+    this.#culture = param
+  }
+
+  set jobsApplied(param) {
+    this.#jobsApplied = param
+  }
+
+  set social(param) {
+    this.#social = param
+  }
+
+  set education(param) {
+    this.#education = param
   }
 
   increaseAccessCount(value = 1) {
@@ -52,10 +112,21 @@ class User {
 
   toJson() {
     return {
+      name: this.#name,
       id: this.#id,
       email: this.#email,
       passwordHash: this.#passwordHash,
-      accessCount: this.#accessCount
+      accessCount: this.#accessCount,
+      username: this.#username,
+      picture: this.#picture,
+      general: this.#general,
+      professionalOverview: this.#professionalOverview,
+      relocation: this.#relocation,
+      preferences: this.#preferences,
+      culture: this.#culture,
+      social: this.#social,
+      education: this.#education,
+      jobsApplied: this.#jobsApplied,
     }
   }
 }
