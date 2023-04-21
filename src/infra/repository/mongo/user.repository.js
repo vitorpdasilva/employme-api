@@ -35,9 +35,8 @@ class MongoUserRepository {
   static async register(user) {
     // eslint-disable-next-line no-unused-vars
     const { ...userJson} = user.toJson()
-    const userDb = await UserModel(userJson).save()
+    await UserModel(userJson).save()
     
-    user.id = userDb._id
     return user
   }
 }

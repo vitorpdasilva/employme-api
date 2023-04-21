@@ -14,7 +14,7 @@ router.route('/user')
     })
   })
   .patch(async(req, res) => {
-    console.log({ req: req.body })
+    console.log({ body: req.body, })
     try {
       const updatedUser = await User.findOneAndUpdate(
         { id: req.body.id }, 
