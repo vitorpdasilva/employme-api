@@ -1,7 +1,7 @@
 const ErrorUser = require('../errors/ErroUser')
 const User = require('../../domain/entity/user')
 const JwtService = require('../services/jwt')
-const { vd: uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 
 async function Register(userRepository, { email, password, name }) {
   const user = new User(email)

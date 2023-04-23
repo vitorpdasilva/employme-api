@@ -8,6 +8,7 @@ const cors = require('cors')
 const chalk = require('chalk')
 
 const { authRoutes, jobRoutes, jobsRoutes, skillListRoutes, userRoutes } = require('./routes')
+const APP_PORT = process.env.APP_PORT || 3050
 
 console.log({ DB_CONNECT: process.env.DB_CONNECT })
 
@@ -34,4 +35,4 @@ app.use('/api', skillListRoutes);
 app.use('/api', userRoutes);
 
 //port
-app.listen(3001, () => console.log(chalk.green('server running port 3001')));
+app.listen(APP_PORT, () => console.log(chalk.green(`server running port ${APP_PORT}`)));
