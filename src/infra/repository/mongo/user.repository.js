@@ -17,7 +17,7 @@ class MongoUserRepository {
     user.increaseAccessCount(userDb.accessCount)
     user.picture = userDb.picture
     user.general = userDb.general
-    user.professionalOverview = userDb.professionalOverview
+    user.professional = userDb.professional
     user.relocation = userDb.relocation
     user.preferences = userDb.preferences
     user.culture = userDb.culture

@@ -9,7 +9,7 @@ class User {
   #username = ''
   #picture = ''
   #general = {}
-  #professionalOverview = {}
+  #professional = {}
   #relocation = {}
   #preferences = {}
   #culture = {}
@@ -78,8 +78,8 @@ class User {
     this.#general = param
   }
 
-  set professionalOverview(param) {
-    this.#professionalOverview = param
+  set professional(param) {
+    this.#professional = param
   }
 
   set relocation(param) {
@@ -120,7 +120,7 @@ class User {
       username: this.#username,
       picture: this.#picture,
       general: this.#general,
-      professionalOverview: this.#professionalOverview,
+      professional: this.#professional,
       relocation: this.#relocation,
       preferences: this.#preferences,
       culture: this.#culture,

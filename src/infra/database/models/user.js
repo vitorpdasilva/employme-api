@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     phone: String,
     bio: String
   },
-  professionalOverview: {
+  professional: {
     profession: Number,
     yearsOfExp: Number,
     openToDiffRole: Boolean,
@@ -30,7 +30,16 @@ const UserSchema = new mongoose.Schema({
       { skillId: Number, yearsOfExp: Number },
     ],
     workExperience: [
-      { id: String, title: String, company: String, location: String, startDate: Date, endDate: Date, description: String },
+      { 
+        id: String, 
+        title: String, 
+        company: String, 
+        location: String, 
+        startDate: Date, 
+        current: Boolean, 
+        endDate: Date, 
+        description: String 
+      },
     ]
   },
   education: [
