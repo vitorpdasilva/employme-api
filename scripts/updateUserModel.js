@@ -12,7 +12,7 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
     for (let doc of docs) {
       console.log({ doc })
       if (doc.professional) {
-        doc.professional = doc.professional;
+        doc.professional = doc.professionalOverview;
         delete doc.professional;
         await doc.save();
       }
