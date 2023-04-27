@@ -8,14 +8,6 @@ export class SignInDto {
   password: string;
 }
 
-export class TokenOutputDto {
-  @ApiProperty({ required: true, description: 'Access Token' })
-  accessToken: string;
-
-  @ApiProperty({ required: true, description: 'Refresh Token' })
-  refreshToken: string;
-}
-
 export class ProfileOutputDto {
   @ApiProperty({ required: true, description: 'Email' })
   email: string;

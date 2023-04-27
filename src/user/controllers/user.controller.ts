@@ -1,6 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
-import { RegisterUserInputDto } from '../dtos/register-user.dto';
+import {
+  RegisterUserInputDto,
+  RegisterUserOutputDto,
+} from '../dtos/register-user.dto';
 import { UserService } from '../services/user.service';
 
 @ApiTags('User')
@@ -9,9 +12,11 @@ export class UserController {
   constructor(private readonly service: UserService) {}
 
   @ApiOperation({ description: 'Register a new user' })
-  @ApiCreatedResponse({ type: RegisterUserInputDto })
+  @ApiCreatedResponse({ type: RegisterUserOutputDto })
   @Post()
-  public create(@Body() input: RegisterUserInputDto) {
+  public create(
+    @Body() input: RegisterUserInputDto,
+  ): Promise<RegisterUserOutputDto> {
     return this.service.register(input);
   }
 }

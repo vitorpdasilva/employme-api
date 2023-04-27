@@ -6,9 +6,6 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
-import { SignInDto, TokenOutputDto } from '../dtos/signin.dto';
-import { AuthGuard } from '../guards/auth.guard';
 import {
   ApiBadRequestResponse,
   ApiNotFoundResponse,
@@ -17,6 +14,10 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { TokenOutputDto } from '../../shared/dtos/token.dto';
+import { AuthService } from '../services/auth.service';
+import { SignInDto } from '../dtos/signin.dto';
+import { AuthGuard } from '../guards/auth.guard';
 
 @ApiTags('Auth')
 @Controller('auth')

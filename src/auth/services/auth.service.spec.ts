@@ -1,13 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
-import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserService } from '../../user/services/user.service';
-import { UserDto } from '../../user/dtos/user.dto';
 import { UnauthorizedException } from '@nestjs/common';
+import { UserDto } from '../../user/dtos/user.dto';
+import { UserService } from '../../user/services/user.service';
+import { TokenService } from '../../shared/services/token.service';
+import { AuthService } from './auth.service';
 
 const mockUserService = {
   findOneByEmail: jest.fn(),
+};
+
+const mockTokenService = {
+  generate: jest.fn(),
 };
 
 const mockUser: UserDto = {
@@ -22,29 +26,25 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        ConfigModule,
-        JwtModule.registerAsync({
-          useFactory: () => {
-            return {
-              secret: 'JWT_SECRET_KEY',
-              signOptions: {
-                expiresIn: '60s',
-              },
-            };
-          },
-        }),
-      ],
+      imports: [ConfigModule],
       providers: [
         {
           provide: UserService,
           useValue: mockUserService,
+        },
+        {
+          provide: TokenService,
+          useValue: mockTokenService,
         },
         AuthService,
       ],
     }).compile();
     service = module.get<AuthService>(AuthService);
     config = module.get<ConfigService>(ConfigService);
+    mockTokenService.generate.mockResolvedValueOnce({
+      accessToken: 'a2',
+      refreshToken: 'r3',
+    });
   });
 
   it('should throw an error when not pass a email to sign in ', async () => {

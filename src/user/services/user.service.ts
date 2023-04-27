@@ -4,16 +4,21 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { TokenService } from '../../shared/services/token.service';
 import { UserRepository } from '../repositories/user.repository';
 import {
   RegisterUserDto,
   RegisterUserInputDto,
+  RegisterUserOutputDto,
 } from '../dtos/register-user.dto';
 import { UserDto } from '../dtos/user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly repository: UserRepository) {}
+  constructor(
+    private readonly repository: UserRepository,
+    private readonly tokenService: TokenService,
+  ) {}
 
   public async findByEmail(email: string) {
     const user = await this.repository.findOneByEmail(email);
@@ -23,7 +28,9 @@ export class UserService {
     return user;
   }
 
-  public async register(userInput: RegisterUserInputDto): Promise<UserDto> {
+  public async register(
+    userInput: RegisterUserInputDto,
+  ): Promise<RegisterUserOutputDto> {
     const { email, password } = userInput;
     const userFound = await this.repository.findOneByEmail(email);
     if (userFound) {
@@ -33,7 +40,15 @@ export class UserService {
       email: userInput.email,
       passwordHash: bcrypt.hashSync(password, 9),
     };
-    return this.repository.create(user);
+    const userSaved = await this.repository.create(user);
+    const tokens = await this.tokenService.generate({
+      email: userSaved.email,
+      sub: userSaved.id,
+    });
+    return {
+      ...userSaved,
+      ...tokens,
+    };
   }
 
   public async increaseAccessCount(user: UserDto): Promise<UserDto> {

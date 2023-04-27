@@ -1,20 +1,18 @@
-import { ConfigService } from '@nestjs/config';
 import {
   BadRequestException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserService } from '../../user/services/user.service';
-import { TokenOutputDto } from '../dtos/signin.dto';
+import { TokenOutputDto } from '../../shared/dtos/token.dto';
+import { TokenService } from './../../shared/services/token.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService,
-    private configService: ConfigService,
+    private tokenService: TokenService,
   ) {}
 
   public async signIn(
@@ -33,30 +31,12 @@ export class AuthService {
       throw new UnauthorizedException('Invalid password!');
     }
     const payload = { email: user.email, sub: user.id };
-    return this.generateTokens(payload);
+    return this.tokenService.generate(payload);
   }
 
   public async refreshToken(email: string): Promise<TokenOutputDto> {
     const user = await this.userService.findByEmail(email);
     const payload = { email: user.email, sub: user.id };
-    return this.generateTokens(payload);
-  }
-
-  private async generateTokens<T extends string | object | Buffer>(
-    payload: T,
-  ): Promise<TokenOutputDto> {
-    const refreshExpiresIn = this.configService.get<string>(
-      'JWT_REFRESH_TOKEN_EXPIRATION_TIME',
-    );
-    const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload),
-      this.jwtService.signAsync(payload, {
-        expiresIn: refreshExpiresIn,
-      }),
-    ]);
-    return {
-      accessToken,
-      refreshToken,
-    };
+    return this.tokenService.generate(payload);
   }
 }

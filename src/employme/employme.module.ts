@@ -19,7 +19,7 @@ import { SkillModule } from '../skill/skill.module';
     AuthModule,
     UserModule,
     JobModule,
-    SkillModule
+    SkillModule,
   ],
   controllers: [],
   providers: [],
