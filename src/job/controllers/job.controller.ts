@@ -22,6 +22,7 @@ export class JobController {
     return this.service.findAll();
   }
 
+  @ApiOkResponse({ type: JobDto })
   @Post()
   public async create(@Body() body: RegisterJobInputDto): Promise<JobDto> {
     const { title, location, locationType, salary } = body;
@@ -34,7 +35,7 @@ export class JobController {
   @ApiOkResponse({ type: JobDto })
   @Get(':id')
   public async getOne(@Param('id') id: string): Promise<JobDto> {
-    return this.service.getById(id);
+    return this.service.findById(id);
   }
 
   /**
@@ -42,6 +43,13 @@ export class JobController {
    * register user a applicant
    * update user job applied
    */
+  @ApiOkResponse({ type: JobDto })
   @Post(':id/apply')
-  public async apply() {}
+  public async apply(
+    @Param('id') id: string,
+    @Body('applicantId') applicantId: string,
+  ): Promise<JobDto> {
+    console.log('parmas', id, applicantId);
+    return this.service.apply(id, applicantId);
+  }
 }
