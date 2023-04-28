@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
-import { JwtService } from '@nestjs/jwt';
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { HttpArgumentsHost } from '@nestjs/common/interfaces/features/arguments-host.interface';
-import { AuthGuard } from './auth.guard';
 import { ConfigService } from '@nestjs/config';
+import { HttpArgumentsHost } from '@nestjs/common/interfaces/features/arguments-host.interface';
+import { TokenService } from '../../shared/services/token.service';
+import { AuthGuard } from './auth.guard';
 
-const mockJwtService = {
-  verifyAsync: jest.fn(),
+const mockTokenService = {
+  verify: jest.fn(),
 };
 
 describe('AuthGuard', () => {
@@ -17,8 +17,8 @@ describe('AuthGuard', () => {
       providers: [
         AuthGuard,
         {
-          provide: JwtService,
-          useValue: mockJwtService,
+          provide: TokenService,
+          useValue: mockTokenService,
         },
         ConfigService,
       ],
@@ -49,7 +49,7 @@ describe('AuthGuard', () => {
       const mockExecutionContext: Partial<ExecutionContext> = {
         switchToHttp: () => mockHttpArgumentsHost as HttpArgumentsHost,
       };
-      mockJwtService.verifyAsync.mockResolvedValueOnce({
+      mockTokenService.verify.mockResolvedValueOnce({
         email: 'test@test.com',
       });
       const result = await guard.canActivate(

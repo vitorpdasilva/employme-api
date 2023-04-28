@@ -7,6 +7,6 @@ export class SkillService {
   constructor(private readonly repository: SkillRepository) {}
 
   public async findAll(): Promise<SkillDto[]> {
-    return this.repository.findAll()
+    return this.repository.findAll();
   }
 }
