@@ -3,32 +3,32 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type JobDocument = HydratedDocument<Job>;
 
-@Schema({ id: false })
+@Schema({ _id: false })
 export class Location {
   @Prop({ type: String })
   city: string;
 
   @Prop({ type: String })
   country: string;
-  
+
   @Prop({ type: String })
   province: string;
 }
 
-@Schema({ id: false })
+@Schema({ _id: false })
 export class Salary {
   @Prop({ type: Number })
   from: number;
 
   @Prop({ type: Number })
   to: number;
-  
+
   @Prop({ type: String })
   currency: string;
-  
+
   @Prop({ type: String })
   period: string;
-  
+
   @Prop({ type: String })
   description: string;
 
