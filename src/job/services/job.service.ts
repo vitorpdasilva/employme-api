@@ -15,8 +15,8 @@ export class JobService {
     return this.repository.findAll();
   }
 
-  public findById(id: string): Promise<JobDto> {
-    const job = this.repository.findById(id);
+  public async findById(id: string): Promise<JobDto> {
+    const job = await this.repository.findById(id);
     if (!job) {
       throw new NotFoundException('Job not found');
     }
