@@ -1,7 +1,13 @@
+## Employ Me - Api
 
-## Getting Started
+### Run Locally
 
-1. Create a `.env` file -> `touch .env`
-2. Set the variable `DB_URL` (Ask a developer for credentials)
-3. Set the variable `DB_NAME` (Ask a developer for the name and db access)
-3. run `node index.js`
+- `yarn` to install dependecies
+- `cat .env.sample > .env` create a file .env based in .env.sample
+- `yarn dev` to run api in dev mode
+- [Swagger](http://localhost:3500/swagger)
+
+### Unit Tests
+
+- The script `yarn test`.
+- `yarn test:cov` to show tests with coverage
