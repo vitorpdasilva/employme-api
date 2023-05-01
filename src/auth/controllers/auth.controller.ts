@@ -16,13 +16,14 @@ import {
 } from '@nestjs/swagger';
 import { TokenOutputDto } from '../../shared/dtos/token.dto';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../../user/services/user.service';
 import { SignInDto } from '../dtos/signin.dto';
 import { AuthGuard } from '../guards/auth.guard';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private userService: UserService) {}
 
   @ApiOperation({ description: 'Login' })
   @ApiOkResponse({ type: TokenOutputDto })
@@ -32,8 +33,11 @@ export class AuthController {
   @ApiUnauthorizedResponse({ description: 'Invalid password' })
   @ApiNotFoundResponse({ description: 'User not found' })
   @Post('login')
-  signIn(@Body() signInDto: SignInDto) {
-    return this.authService.signIn(signInDto.email, signInDto.password);
+  async signIn(@Body() signInDto: SignInDto) {
+    return {
+      userData: await this.userService.findByEmail(signInDto.email),
+      tokens: await this.authService.signIn(signInDto.email, signInDto.password),
+    }
   }
 
   @ApiOperation({ description: 'Refresh tokens' })

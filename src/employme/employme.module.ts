@@ -12,7 +12,7 @@ import { SkillModule } from '../skill/skill.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
+        uri: configService.getOrThrow<string>('MONGODB_URI'),
       }),
       inject: [ConfigService],
     }),
