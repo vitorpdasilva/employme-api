@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TokenService } from './token.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TokenService } from './token.service';
 
 describe('TokenService', () => {
   let service: TokenService;
@@ -30,7 +30,7 @@ describe('TokenService', () => {
 
   it('should generate tokens for refresh', async () => {
     jest.spyOn(config, 'get').mockReturnValue('60s');
-    const tokens = await service.generate('test@test.com');
+    const tokens = await service.generate({ sub: 1 });
     expect(tokens.accessToken).toBeDefined();
     expect(tokens.refreshToken).toBeDefined();
   });

@@ -13,6 +13,9 @@ export class User {
 
   @Prop()
   passwordHash: string;
+
+  @Prop({ type: [String] })
+  jobsApplied: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -15,6 +15,11 @@ export class UserRepository {
     return plainToDto<UserDocument, UserDto>(UserDto, user);
   }
 
+  public async findById(id: string): Promise<UserDto> {
+    const user = await this.model.findOne({ _id: id }).lean();
+    return plainToDto<UserDocument, UserDto>(UserDto, user);
+  }
+
   public async updateAccessCount(user: UserDto): Promise<void> {
     await this.model.updateOne(
       { _id: user.id },
@@ -25,5 +30,12 @@ export class UserRepository {
   public async create(user: RegisterUserDto): Promise<UserDto> {
     const userSaved = (await new this.model(user).save()).toJSON();
     return plainToDto<UserDocument, UserDto>(UserDto, userSaved);
+  }
+
+  public async updateAppliedJob(user: UserDto, jobId: string): Promise<void> {
+    await this.model.updateOne(
+      { _id: user.id, jobsApplied: { $nin: jobId } },
+      { $push: { jobsApplied: jobId } },
+    );
   }
 }

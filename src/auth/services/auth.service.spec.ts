@@ -7,7 +7,7 @@ import { TokenService } from '../../shared/services/token.service';
 import { AuthService } from './auth.service';
 
 const mockUserService = {
-  findOneByEmail: jest.fn(),
+  findByEmail: jest.fn(),
 };
 
 const mockTokenService = {
@@ -60,7 +60,7 @@ describe('AuthService', () => {
   });
 
   it('should throw an error when trying the wrong password to sign in ', async () => {
-    mockUserService.findOneByEmail.mockResolvedValueOnce(mockUser);
+    mockUserService.findByEmail.mockResolvedValueOnce(mockUser);
     jest.spyOn(config, 'get').mockReturnValue('60s');
     expect(() =>
       service.signIn('test@test.com', 'test3123'),
@@ -68,7 +68,7 @@ describe('AuthService', () => {
   });
 
   it('should generate the tokens when sign in', async () => {
-    mockUserService.findOneByEmail.mockResolvedValueOnce(mockUser);
+    mockUserService.findByEmail.mockResolvedValueOnce(mockUser);
     jest.spyOn(config, 'get').mockReturnValue('60s');
     const tokens = await service.signIn('test@test.com', 'test123');
     expect(tokens.accessToken).toBeDefined();
@@ -76,7 +76,7 @@ describe('AuthService', () => {
   });
 
   it('should generate tokens for refresh', async () => {
-    mockUserService.findOneByEmail.mockResolvedValueOnce(mockUser);
+    mockUserService.findByEmail.mockResolvedValueOnce(mockUser);
     jest.spyOn(config, 'get').mockReturnValue('60s');
     const tokens = await service.refreshToken('test@test.com');
     expect(tokens.accessToken).toBeDefined();

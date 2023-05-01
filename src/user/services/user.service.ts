@@ -28,6 +28,14 @@ export class UserService {
     return user;
   }
 
+  public async findById(id: string) {
+    const user = await this.repository.findById(id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
   public async register(
     userInput: RegisterUserInputDto,
   ): Promise<RegisterUserOutputDto> {
@@ -55,5 +63,9 @@ export class UserService {
     user.accessCount += 1;
     await this.repository.updateAccessCount(user);
     return user;
+  }
+
+  public async updateAppliedJob(user: UserDto, jobId: string): Promise<void> {
+    await this.repository.updateAppliedJob(user, jobId);
   }
 }

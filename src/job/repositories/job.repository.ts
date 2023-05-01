@@ -24,4 +24,12 @@ export class JobRepository {
     const job = (await new this.model(jobInput).save()).toJSON();
     return plainToDto<JobDocument, JobDto>(JobDto, job);
   }
+
+  public async addApplicant(job: JobDto, applicantId: string) {
+    await this.model.updateOne(
+      { _id: job.id, applicants: { $nin: applicantId } },
+      { $push: { applicants: applicantId } },
+    );
+    return this.findById(job.id);
+  }
 }
