@@ -28,12 +28,6 @@ export class Salary {
 
   @Prop({ type: String })
   period: string;
-
-  @Prop({ type: String })
-  description: string;
-
-  @Prop({ type: [String] })
-  tags: string[];
 }
 
 @Schema({ timestamps: true })
@@ -49,6 +43,12 @@ export class Job {
 
   @Prop({ type: [String] })
   applicants: string[];
+
+  @Prop({ type: String })
+  description: string;
+
+  @Prop({ type: [String] })
+  tags: string[];
 
   @Prop({ type: String })
   locationType: string;
