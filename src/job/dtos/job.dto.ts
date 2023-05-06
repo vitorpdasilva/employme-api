@@ -60,6 +60,10 @@ export class JobDto {
 
   @ApiProperty({ type: String })
   @Expose()
+  description: string;
+
+  @ApiProperty({ type: String })
+  @Expose()
   locationType: string;
 
   @ApiProperty({ type: LocationDto })
