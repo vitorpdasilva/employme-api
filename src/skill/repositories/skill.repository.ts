@@ -11,7 +11,6 @@ export class SkillRepository {
 
   public async findAll(): Promise<SkillDto[]> {
     const skills = await this.model.find().lean();
-    console.log({ skills });
     return plainToDto<SkillDocument, SkillDto[]>(SkillDto, skills);
   }
 }

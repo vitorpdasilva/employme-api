@@ -3,7 +3,7 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type SkillDocument = HydratedDocument<SkillList>;
 
-@Schema({ collection: 'skillList' })
+@Schema({ collection: 'skills' })
 export class SkillList {
   @Prop({ alias: '_id', auto: true })
   id: Types.ObjectId;
