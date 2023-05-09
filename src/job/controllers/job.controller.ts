@@ -26,7 +26,6 @@ export class JobController {
   @Post()
   public async create(@Body() body: RegisterJobInputDto): Promise<JobDto> {
     const { title, location, locationType, salary } = body;
-    console.log({ body });
     if (!title || !location || !locationType || !salary) {
       throw new BadRequestException('One of the required fields is missing');
     }

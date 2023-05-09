@@ -14,9 +14,11 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { plainToDto } from '../../common/helpers/plain-to-dto.helper';
 import { TokenOutputDto } from '../../shared/dtos/token.dto';
-import { AuthService } from '../services/auth.service';
+import { UserWithTokensOutputDto } from '../../user/dtos/register-user.dto';
 import { UserService } from '../../user/services/user.service';
+import { AuthService } from '../services/auth.service';
 import { SignInDto } from '../dtos/signin.dto';
 import { AuthGuard } from '../guards/auth.guard';
 
@@ -29,7 +31,7 @@ export class AuthController {
   ) {}
 
   @ApiOperation({ description: 'Login' })
-  @ApiOkResponse({ type: TokenOutputDto })
+  @ApiOkResponse({ type: UserWithTokensOutputDto })
   @ApiBadRequestResponse({
     description: 'Email is required; Password is required',
   })
@@ -37,13 +39,15 @@ export class AuthController {
   @ApiNotFoundResponse({ description: 'User not found' })
   @Post('login')
   async signIn(@Body() signInDto: SignInDto) {
-    return {
-      userData: await this.userService.findByEmail(signInDto.email),
-      tokens: await this.authService.signIn(
-        signInDto.email,
-        signInDto.password,
-      ),
+    const [userData, tokens] = await Promise.all([
+      this.userService.findByEmail(signInDto.email),
+      this.authService.signIn(signInDto.email, signInDto.password),
+    ]);
+    const response = {
+      userData,
+      tokens,
     };
+    return plainToDto(UserWithTokensOutputDto, response);
   }
 
   @ApiOperation({ description: 'Refresh tokens' })

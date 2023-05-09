@@ -4,12 +4,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { plainToDto } from '../../common/helpers/plain-to-dto.helper';
 import { TokenService } from '../../shared/services/token.service';
 import { UserRepository } from '../repositories/user.repository';
 import {
   RegisterUserDto,
   RegisterUserInputDto,
-  RegisterUserOutputDto,
+  UserWithTokensOutputDto,
 } from '../dtos/register-user.dto';
 import { UserDto } from '../dtos/user.dto';
 
@@ -38,7 +39,7 @@ export class UserService {
 
   public async register(
     userInput: RegisterUserInputDto,
-  ): Promise<RegisterUserOutputDto> {
+  ): Promise<UserWithTokensOutputDto> {
     const { email, password } = userInput;
     const userFound = await this.repository.findOneByEmail(email);
     if (userFound) {
@@ -53,10 +54,11 @@ export class UserService {
       email: userSaved.email,
       sub: userSaved.id,
     });
-    return {
-      ...userSaved,
-      ...tokens,
+    const response = {
+      userData: userSaved,
+      tokens,
     };
+    return plainToDto(UserWithTokensOutputDto, response);
   }
 
   public async increaseAccessCount(user: UserDto): Promise<UserDto> {
