@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
 class UserGeneralDto {
@@ -199,6 +199,7 @@ export class UserDto {
   @ApiProperty({ required: true, description: 'Password Hash' })
   @Expose()
   public passwordHash: string;
+
   @Expose()
   public name?: string;
 
@@ -235,3 +236,5 @@ export class UserDto {
   @Expose()
   public education?: UserEducationDto[] = [];
 }
+
+export class UserOutputDto extends OmitType(UserDto, ['passwordHash']) {}

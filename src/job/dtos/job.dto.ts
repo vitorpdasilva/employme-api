@@ -31,14 +31,6 @@ class SalaryDto {
   @ApiProperty({ type: String })
   @Expose()
   period: string;
-
-  @ApiProperty({ type: String })
-  @Expose()
-  description: string;
-
-  @ApiProperty({ type: [String] })
-  @Expose()
-  tags: string[];
 }
 
 export class JobDto {
@@ -61,6 +53,10 @@ export class JobDto {
   @ApiProperty({ type: String })
   @Expose()
   description: string;
+
+  @ApiProperty({ type: [String] })
+  @Expose()
+  tags: string[];
 
   @ApiProperty({ type: String })
   @Expose()
