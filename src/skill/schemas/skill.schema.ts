@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 
-export type SkillDocument = HydratedDocument<Skill>;
+export type SkillDocument = HydratedDocument<SkillList>;
 
-@Schema()
-export class Skill {
+@Schema({ collection: 'skillList' })
+export class SkillList {
   @Prop({ alias: '_id', auto: true })
   id: Types.ObjectId;
 
@@ -12,4 +12,4 @@ export class Skill {
   name: string;
 }
 
-export const SkillSchema = SchemaFactory.createForClass(Skill);
+export const SkillSchema = SchemaFactory.createForClass(SkillList);
