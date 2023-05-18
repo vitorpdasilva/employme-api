@@ -10,6 +10,7 @@ import { UserRepository } from '../repositories/user.repository';
 import {
   RegisterUserDto,
   RegisterUserInputDto,
+  UpdateUserInputDto,
   UserWithTokensOutputDto,
 } from '../dtos/register-user.dto';
 import { UserDto } from '../dtos/user.dto';
@@ -59,6 +60,17 @@ export class UserService {
       tokens,
     };
     return plainToDto(UserWithTokensOutputDto, response);
+  }
+
+  public async update(
+    id: string,
+    userInput: UpdateUserInputDto,
+  ): Promise<void> {
+    const userFound = await this.repository.findById(id);
+    if (!userFound) {
+      throw new NotFoundException('User not exists');
+    }
+    await this.repository.update(id, userInput);
   }
 
   public async increaseAccessCount(user: UserDto): Promise<UserDto> {

@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { UserDto, UserOutputDto } from './user.dto';
 import { Expose, Type } from 'class-transformer';
 import { TokenOutputDto } from '../../shared/dtos/token.dto';
@@ -8,6 +8,10 @@ export class RegisterUserInputDto extends PickType(UserDto, ['email']) {
   @Expose()
   public password: string;
 }
+
+export class UpdateUserInputDto extends PartialType(
+  OmitType(UserDto, ['email', 'id', 'passwordHash']),
+) {}
 
 export class RegisterUserDto extends PickType(UserDto, [
   'email',
