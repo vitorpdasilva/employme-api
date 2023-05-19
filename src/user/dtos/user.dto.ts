@@ -1,5 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
+import { UserType } from '../enums/user.enum';
 
 class UserGeneralDto {
   @Expose()
@@ -89,7 +90,7 @@ class UserRecolocationDto {
   public noticePeriod: number;
 }
 
-class UserJobSearchStatus {
+class UserJobSearchStatusDto {
   @Expose()
   public id: string;
 
@@ -97,7 +98,7 @@ class UserJobSearchStatus {
   public label: string;
 }
 
-class UserSalary {
+class UserSalaryDto {
   @Expose()
   public currency: string;
 
@@ -108,7 +109,7 @@ class UserSalary {
   public periodicity: string;
 }
 
-class UserCompanySize {
+class UserCompanySizeDto {
   @Expose()
   public id: number;
 
@@ -121,19 +122,19 @@ class UserCompanySize {
 
 class UserPreferencesDto {
   @Expose()
-  public jobSearchStatus: UserJobSearchStatus;
+  public jobSearchStatus: UserJobSearchStatusDto;
 
   @Expose()
-  public salary: UserSalary;
+  public salary: UserSalaryDto;
 
   @Expose()
-  public companySize: UserCompanySize;
+  public companySize: UserCompanySizeDto;
 
   @Expose()
   public hideFromCompanies: string[];
 }
 
-class UserProfessional {
+class UserProfessionalDto {
   @Expose()
   public profession: number;
 
@@ -144,16 +145,16 @@ class UserProfessional {
   public openToDiffRole: boolean;
 
   @Expose()
-  public preferenceToWork: number[];
+  public preferencesToWork: number[];
 
   @Expose()
-  public skillRank: UserSkillRank[];
+  public skillsRank: UserSkillRankDto[];
 
   @Expose()
-  public workExperience: UserWorkExperience[];
+  public workExperiences: UserWorkExperienceDto[];
 }
 
-class UserSkillRank {
+class UserSkillRankDto {
   @Expose()
   public skillId: number;
 
@@ -161,7 +162,7 @@ class UserSkillRank {
   public yearsOfExp: number;
 }
 
-class UserWorkExperience {
+class UserWorkExperienceDto {
   @Expose()
   public id: string;
 
@@ -201,6 +202,9 @@ export class UserDto {
   public passwordHash: string;
 
   @Expose()
+  public type: UserType;
+
+  @Expose()
   public name?: string;
 
   @Expose()
@@ -213,13 +217,13 @@ export class UserDto {
   public picture?: string;
 
   @Expose()
-  public jobsApplied?: number[];
+  public jobsApplied?: string[];
 
   @Expose()
   public general?: UserGeneralDto;
 
   @Expose()
-  public professional?: UserProfessional;
+  public professional?: UserProfessionalDto;
 
   @Expose()
   public relocation?: UserRecolocationDto;
