@@ -27,7 +27,7 @@ export class UserController {
   public async update(
     @Param('id') id: string,
     @Body() input: UpdateUserInputDto,
-  ): Promise<void> {
-    await this.service.update(id, input);
+  ): Promise<UserWithTokensOutputDto> {
+    return await this.service.update(id, input);
   }
 }

@@ -62,15 +62,19 @@ export class UserService {
     return plainToDto(UserWithTokensOutputDto, response);
   }
 
-  public async update(
-    id: string,
-    userInput: UpdateUserInputDto,
-  ): Promise<void> {
+  public async update(id: string, userInput: UpdateUserInputDto): Promise<any> {
     const userFound = await this.repository.findById(id);
     if (!userFound) {
       throw new NotFoundException('User not exists');
     }
     await this.repository.update(id, userInput);
+    // todo: fix this for the god's sake
+    return {
+      userData: {
+        ...userFound,
+        ...userInput,
+      },
+    };
   }
 
   public async increaseAccessCount(user: UserDto): Promise<UserDto> {
