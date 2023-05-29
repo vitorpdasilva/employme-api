@@ -21,7 +21,10 @@ class CompanyLocation {
 }
 
 @Schema({ _id: false })
-class Company {
+export class Company {
+  @Prop({ alias: '_id', auto: true })
+  id: Types.ObjectId;
+
   @Prop({ type: String })
   name: string;
 
@@ -32,7 +35,7 @@ class Company {
   website: string;
 
   @Prop({ type: String })
-  email: string;
+  adminEmail: string;
 
   @Prop({ type: String })
   phone: string;
@@ -46,3 +49,5 @@ class Company {
   @Prop({ type: String })
   invitees: string[];
 }
+
+export const CompanySchema = SchemaFactory.createForClass(Company);

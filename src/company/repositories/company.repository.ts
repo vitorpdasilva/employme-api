@@ -1,6 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Company } from '../schemas/company.schema';
+import { CompanyDto } from '../dtos/company.dto';
+import { plainToDto } from '../../common/helpers/plain-to-dto.helper';
 @Injectable()
 export class CompanyRepository {
-  constructor(@InjectModel()) {}
+  constructor(@InjectModel(Company.name) private model: Model<Company>) {}
+
+  public async create(company: CompanyDto): Promise<CompanyDto> {
+    console.log('do something');
+    const companySaved = (await new this.model(company)).save();
+    return plainToDto<Company, CompanyDto>(CompanyDto, companySaved);
+  }
 }
