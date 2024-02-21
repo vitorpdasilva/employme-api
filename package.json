@@ -5,6 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:types": "npx openapi-typescript http://localhost:3500/swagger-json --output types.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
