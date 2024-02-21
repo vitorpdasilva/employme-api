@@ -28,6 +28,9 @@ export class Company {
   @Prop({ type: String })
   name: string;
 
+  @Prop({ type: String })
+  domain: string;
+
   @Prop({ type: CompanyLocation })
   location: CompanyLocation;
 

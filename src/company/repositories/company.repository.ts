@@ -13,4 +13,17 @@ export class CompanyRepository {
     const companySaved = (await new this.model(company)).save();
     return plainToDto<Company, CompanyDto>(CompanyDto, companySaved);
   }
+
+  public async isDomainAlreadyRegistered(email: string): Promise<boolean> {
+    try {
+      const domain = email.substring(email.lastIndexOf('@') + 1);
+      const existingDomain = this.model.findOne({
+        email: { $regex: `@${domain}$`, $options: 'i' },
+      });
+      return !!existingDomain;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }
