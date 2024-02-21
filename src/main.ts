@@ -15,7 +15,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
+  SwaggerModule.setup('swagger', app, document, { swaggerUrl: '/json' });
   app.enableCors();
   app.setGlobalPrefix('/api');
   await app.listen(PORT);
