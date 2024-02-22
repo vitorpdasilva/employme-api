@@ -1,8 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { CompanyRepository } from '../repositories/company.repository';
-import { Company } from '../schemas/company.schema';
 import { CompanyDto } from '../dtos/company.dto';
-import { RegisterCompanyInputDto } from '../dtos/register.dto';
+import { RegisterCompanyInputDto } from '../dtos/register-company.dto';
 import { TokenService } from 'src/shared/services/token.service';
 @Injectable()
 export class CompanyService {

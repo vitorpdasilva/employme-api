@@ -189,7 +189,7 @@ class UserWorkExperienceDto {
 }
 
 export class UserDto {
-  @ApiProperty({ required: true, description: 'ID' })
+  @ApiProperty({ required: true, description: 'ID', uniqueItems: true })
   @Expose()
   public id: string;
 
@@ -205,40 +205,40 @@ export class UserDto {
   public type: UserType;
 
   @Expose()
-  public name?: string;
+  public name: string;
 
   @Expose()
-  public accessCount?: number = 0;
+  public accessCount: number = 0;
 
   @Expose()
-  public username?: string;
+  public username: string;
 
   @Expose()
-  public picture?: string;
+  public picture: string;
 
   @Expose()
-  public jobsApplied?: string[];
+  public jobsApplied: string[];
 
   @Expose()
-  public general?: UserGeneralDto;
+  public general: UserGeneralDto;
 
   @Expose()
-  public professional?: UserProfessionalDto;
+  public professional: UserProfessionalDto;
 
   @Expose()
-  public relocation?: UserRecolocationDto;
+  public relocation: UserRecolocationDto;
 
   @Expose()
-  public preferences?: UserPreferencesDto;
+  public preferences: UserPreferencesDto;
 
   @Expose()
-  public culture?: UserCultureDto;
+  public culture: UserCultureDto;
 
   @Expose()
-  public social?: UserSocialDto[] = [];
+  public social: UserSocialDto[] = [];
 
   @Expose()
-  public education?: UserEducationDto[] = [];
+  public education: UserEducationDto[] = [];
 }
 
 export class UserOutputDto extends OmitType(UserDto, ['passwordHash']) {}

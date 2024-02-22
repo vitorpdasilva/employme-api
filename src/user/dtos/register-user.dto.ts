@@ -3,7 +3,7 @@ import { UserDto, UserOutputDto } from './user.dto';
 import { Expose, Type } from 'class-transformer';
 import { TokenOutputDto } from '../../shared/dtos/token.dto';
 
-export class RegisterUserInputDto extends PickType(UserDto, ['email']) {
+export class RegisterUserInputDto extends PickType(UserDto, ['email', 'name']) {
   @ApiProperty({ required: true, description: 'Password' })
   @Expose()
   public password: string;
@@ -15,6 +15,7 @@ export class UpdateUserInputDto extends PartialType(
 
 export class RegisterUserDto extends PickType(UserDto, [
   'email',
+  'name',
   'passwordHash',
 ]) {}
 

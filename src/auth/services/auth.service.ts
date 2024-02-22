@@ -34,6 +34,29 @@ export class AuthService {
     return this.tokenService.generate(payload);
   }
 
+  public async signUp(
+    name: string,
+    email: string,
+    password: string,
+  ): Promise<TokenOutputDto> {
+    if (!name) {
+      throw new BadRequestException('Name is required!');
+    }
+    if (!email) {
+      throw new BadRequestException('Email is required!');
+    }
+    if (!password) {
+      throw new BadRequestException('Password is required!');
+    }
+    const user = await this.userService.register({
+      name,
+      email,
+      password,
+    });
+    const payload = { email: user.userData.email, sub: user.userData.id };
+    return this.tokenService.generate(payload);
+  }
+
   public async refreshToken(email: string): Promise<TokenOutputDto> {
     const user = await this.userService.findByEmail(email);
     const payload = { email: user.email, sub: user.id };

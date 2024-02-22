@@ -9,7 +9,7 @@ import {
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { JobService } from '../services/job.service';
 import { JobDto } from '../dtos/job.dto';
-import { RegisterJobInputDto } from '../dtos/register.dto';
+import { RegisterJobInputDto } from '../dtos/register-job.dto';
 
 @ApiTags("Job's")
 @Controller('job')

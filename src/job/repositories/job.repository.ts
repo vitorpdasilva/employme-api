@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { plainToDto } from '../../common/helpers/plain-to-dto.helper';
 import { JobDto } from '../dtos/job.dto';
-import { RegisterJobInputDto } from '../dtos/register.dto';
+import { RegisterJobInputDto } from '../dtos/register-job.dto';
 import { Job, JobDocument } from '../schemas/job.schema';
 
 @Injectable()

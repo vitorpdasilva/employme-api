@@ -19,7 +19,7 @@ import { TokenOutputDto } from '../../shared/dtos/token.dto';
 import { UserWithTokensOutputDto } from '../../user/dtos/register-user.dto';
 import { UserService } from '../../user/services/user.service';
 import { AuthService } from '../services/auth.service';
-import { SignInDto } from '../dtos/signin.dto';
+import { SignInDto, SignUpDto } from '../dtos';
 import { AuthGuard } from '../guards/auth.guard';
 
 @ApiTags('Auth')
@@ -59,5 +59,35 @@ export class AuthController {
   refreshToken(@Request() request: Request) {
     const { email } = request['user'];
     return this.authService.refreshToken(email);
+  }
+
+  @ApiOperation({ description: 'Sign Up' })
+  @ApiOkResponse({ type: UserWithTokensOutputDto })
+  @ApiUnauthorizedResponse({ description: 'User not authorized' })
+  @ApiNotFoundResponse({ description: 'User already found' })
+  @ApiBadRequestResponse({
+    description: 'Email is required; Password is required; name is required',
+  })
+  @Post('signup')
+  async signUp(@Body() signUpDto: SignUpDto) {
+    const userData = await this.userService.register({
+      name: signUpDto.name,
+      email: signUpDto.email,
+      password: signUpDto.password,
+    });
+
+    const tokens = this.authService.signUp(
+      signUpDto.name,
+      signUpDto.email,
+      signUpDto.password,
+    );
+
+    console.log({ userData, tokens });
+
+    const response = {
+      userData,
+      tokens,
+    };
+    return plainToDto(UserWithTokensOutputDto, response);
   }
 }

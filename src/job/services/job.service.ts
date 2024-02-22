@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserService } from '../../user/services/user.service';
 import { JobRepository } from '../repositories/job.repository';
 import { JobDto } from '../dtos/job.dto';
-import { RegisterJobInputDto } from '../dtos/register.dto';
+import { RegisterJobInputDto } from '../dtos/register-job.dto';
 
 @Injectable()
 export class JobService {

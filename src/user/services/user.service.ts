@@ -41,25 +41,31 @@ export class UserService {
   public async register(
     userInput: RegisterUserInputDto,
   ): Promise<UserWithTokensOutputDto> {
-    const { email, password } = userInput;
-    const userFound = await this.repository.findOneByEmail(email);
-    if (userFound) {
-      throw new ConflictException('User already exists');
+    try {
+      const { email, password, name } = userInput;
+      const userFound = await this.repository.findOneByEmail(email);
+      if (userFound) {
+        throw new ConflictException('User already exists');
+      }
+      const user: RegisterUserDto = {
+        email,
+        name,
+        passwordHash: bcrypt.hashSync(password, 9),
+      };
+      const userSaved = await this.repository.create(user);
+
+      const tokens = await this.tokenService.generate({
+        email: userSaved.email,
+        sub: userSaved.id,
+      });
+      const response = {
+        userData: userSaved,
+        tokens,
+      };
+      return plainToDto(UserWithTokensOutputDto, response);
+    } catch (error) {
+      console.log('error', error);
     }
-    const user: RegisterUserDto = {
-      email: userInput.email,
-      passwordHash: bcrypt.hashSync(password, 9),
-    };
-    const userSaved = await this.repository.create(user);
-    const tokens = await this.tokenService.generate({
-      email: userSaved.email,
-      sub: userSaved.id,
-    });
-    const response = {
-      userData: userSaved,
-      tokens,
-    };
-    return plainToDto(UserWithTokensOutputDto, response);
   }
 
   public async update(id: string, userInput: UpdateUserInputDto): Promise<any> {
