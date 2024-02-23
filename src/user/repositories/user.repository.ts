@@ -31,11 +31,7 @@ export class UserRepository {
 
   public async create(user: RegisterUserDto): Promise<UserDto> {
     console.log('user.repository.create', { user });
-    const data = {
-      ...user,
-      _id: new ObjectId(),
-    };
-    const userSaved = (await new this.model(data).save()).toJSON();
+    const userSaved = (await new this.model(user).save()).toJSON();
     console.log('user.repository.create', { userSaved });
 
     return plainToDto<UserDocument, UserDto>(UserDto, userSaved);
