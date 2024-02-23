@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose';
 import { UserType } from '../enums/user.enum';
 
 export type UserDocument = HydratedDocument<User>;
@@ -204,7 +204,7 @@ const UserEducationSchema = SchemaFactory.createForClass(UserEducation);
 
 @Schema()
 export class User {
-  @Prop({ alias: '_id', auto: true })
+  @Prop({ type: SchemaTypes.ObjectId, auto: true })
   id: Types.ObjectId;
 
   @Prop({ unique: true })
