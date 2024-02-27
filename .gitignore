@@ -37,4 +37,4 @@ lerna-debug.log*
 # ENV
 .env
 
-./types.ts
+types.ts
