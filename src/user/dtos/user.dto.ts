@@ -174,44 +174,6 @@ class UserPreferencesDto {
   public hideFromCompanies: string[];
 }
 
-class UserProfessionalDto {
-  @ApiProperty({ type: String })
-  @Expose()
-  public profession: string;
-
-  @ApiProperty({ type: Number })
-  @Expose()
-  public yearsOfExperience: number;
-
-  @ApiProperty({ type: Boolean })
-  @Expose()
-  public openToDiffRole: boolean;
-
-  // TODO: CHANGE TO ENUM
-  @ApiProperty({ type: Boolean })
-  @Expose()
-  public preferencesToWork: number[];
-
-  @ApiProperty({ type: Object, isArray: true })
-  @Expose()
-  public skillsRank: UserSkillRankDto[];
-
-  @ApiProperty({ description: 'Work Experiences' })
-  @Expose()
-  public workExperiences: UserWorkExperienceDto[];
-}
-
-class UserSkillRankDto {
-  // TODO: Change to ENUM
-  @ApiProperty({ type: Number })
-  @Expose()
-  public skillId: number;
-
-  @ApiProperty({ type: Number })
-  @Expose()
-  public yearsOfExp: number;
-}
-
 class UserWorkExperienceDto {
   @ApiProperty({ type: String })
   @Expose()
@@ -248,6 +210,47 @@ class UserWorkExperienceDto {
   @ApiProperty({ type: String })
   @Expose()
   public description: string;
+}
+
+class UserSkillRankDto {
+  // TODO: Change to ENUM
+  @ApiProperty({ type: Number })
+  @Expose()
+  public skillId: number;
+
+  @ApiProperty({ type: Number })
+  @Expose()
+  public yearsOfExp: number;
+}
+
+class UserProfessionalDto {
+  @ApiProperty({ type: String })
+  @Expose()
+  public profession: string;
+
+  @ApiProperty({ type: Number })
+  @Expose()
+  public yearsOfExperience: number;
+
+  @ApiProperty({ type: Boolean })
+  @Expose()
+  public openToDiffRole: boolean;
+
+  // TODO: CHANGE TO ENUM
+  @ApiProperty({ type: [Number] })
+  @Expose()
+  public preferencesToWork: number[];
+
+  @ApiProperty({ type: [UserSkillRankDto] })
+  @Expose()
+  public skillsRank: UserSkillRankDto[];
+
+  @ApiProperty({
+    description: 'Work Experiences',
+    type: [UserWorkExperienceDto],
+  })
+  @Expose()
+  public workExperiences: UserWorkExperienceDto[];
 }
 
 export class UserDto {
