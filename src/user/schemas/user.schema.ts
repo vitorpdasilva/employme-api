@@ -225,7 +225,7 @@ export class User {
   @Prop({ default: 0, type: Number })
   accessCount: number;
 
-  @Prop({ type: String, enum: UserType, default: UserType.Candidate })
+  @Prop({ type: String, enum: UserType, default: UserType.CANDIDATE })
   type: UserType;
 
   @Prop({ type: UserGeneral })

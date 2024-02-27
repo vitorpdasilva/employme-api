@@ -1,12 +1,7 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { UserType } from '../enums/user.enum';
+import { UserType, LocationType, GenderTypeDto } from '../enums/user.enum';
 
-export enum GenderTypeDto {
-  MALE = 'Male',
-  FEMALE = 'Female',
-  OTHER = 'Other',
-}
 class UserGeneralDto {
   @ApiProperty({ type: String })
   @Expose()
@@ -122,99 +117,135 @@ class UserRecolocationDto {
 }
 
 class UserJobSearchStatusDto {
+  @ApiProperty({ type: String })
   @Expose()
   public id: string;
 
+  @ApiProperty({ type: String })
   @Expose()
   public label: string;
 }
 
 class UserSalaryDto {
+  @ApiProperty({ type: String })
   @Expose()
   public currency: string;
 
+  @ApiProperty({ type: String })
   @Expose()
   public amount: string;
 
+  @ApiProperty({ type: String })
   @Expose()
   public periodicity: string;
 }
 
 class UserCompanySizeDto {
+  @ApiProperty({ type: String })
   @Expose()
-  public id: number;
+  public id: string;
 
+  // TODO: Change to ENUM
+  @ApiProperty({ type: Number })
   @Expose()
   public option: number;
 
+  @ApiProperty({ type: String })
   @Expose()
   public label: string;
 }
 
 class UserPreferencesDto {
+  // TODO: Change to ENUM
+  @ApiProperty({ type: String })
   @Expose()
   public jobSearchStatus: UserJobSearchStatusDto;
 
+  @ApiProperty({ type: Object })
   @Expose()
   public salary: UserSalaryDto;
 
+  @ApiProperty({ type: Object })
   @Expose()
   public companySize: UserCompanySizeDto;
 
+  @ApiProperty({ type: String, isArray: true })
   @Expose()
   public hideFromCompanies: string[];
 }
 
 class UserProfessionalDto {
+  @ApiProperty({ type: String })
   @Expose()
-  public profession: number;
+  public profession: string;
 
+  @ApiProperty({ type: Number })
   @Expose()
   public yearsOfExperience: number;
 
+  @ApiProperty({ type: Boolean })
   @Expose()
   public openToDiffRole: boolean;
 
+  // TODO: CHANGE TO ENUM
+  @ApiProperty({ type: Boolean })
   @Expose()
   public preferencesToWork: number[];
 
+  @ApiProperty({ type: Object, isArray: true })
   @Expose()
   public skillsRank: UserSkillRankDto[];
 
+  @ApiProperty({ description: 'Work Experiences' })
   @Expose()
   public workExperiences: UserWorkExperienceDto[];
 }
 
 class UserSkillRankDto {
+  // TODO: Change to ENUM
+  @ApiProperty({ type: Number })
   @Expose()
   public skillId: number;
 
+  @ApiProperty({ type: Number })
   @Expose()
   public yearsOfExp: number;
 }
 
 class UserWorkExperienceDto {
+  @ApiProperty({ type: String })
   @Expose()
   public id: string;
 
+  @ApiProperty({ type: String })
   @Expose()
   public title: string;
 
+  @ApiProperty({ type: String })
   @Expose()
   public company: string;
 
+  @ApiProperty({ type: String, enum: LocationType, enumName: 'LocationType' })
+  @Expose()
+  public locationType: LocationType;
+
+  @ApiProperty({ type: String })
   @Expose()
   public location: string;
 
+  @ApiProperty({ type: Date })
   @Expose()
   public startDate: Date;
 
+  @ApiProperty({ type: Boolean })
   @Expose()
   public current: boolean;
 
+  @ApiProperty({ type: Date })
   @Expose()
   public endDate: Date;
 
+  @ApiProperty({ type: String })
   @Expose()
   public description: string;
 }
@@ -264,21 +295,27 @@ export class UserDto {
   @Expose()
   public general: UserGeneralDto;
 
+  @ApiProperty({ description: 'Professional User Info' })
   @Expose()
   public professional: UserProfessionalDto;
 
+  @ApiProperty({ description: 'Relocation User Info' })
   @Expose()
   public relocation: UserRecolocationDto;
 
+  @ApiProperty({ description: 'Preferences User Info' })
   @Expose()
   public preferences: UserPreferencesDto;
 
+  @ApiProperty({ description: 'Culture User Info' })
   @Expose()
   public culture: UserCultureDto;
 
+  @ApiProperty({ description: 'Social User Info' })
   @Expose()
   public social: UserSocialDto[] = [];
 
+  @ApiProperty({ description: 'Education User Info' })
   @Expose()
   public education: UserEducationDto[] = [];
 }
