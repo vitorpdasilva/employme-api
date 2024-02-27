@@ -53,8 +53,7 @@ export class AuthService {
       email,
       password,
     });
-    console.log({ key: 'auth.service', user });
-    const payload = { email: user.userData.email, sub: user.userData.id };
+    const payload = { email: user?.userData?.email, sub: user?.userData?.id };
     return this.tokenService.generate(payload);
   }
 

@@ -54,8 +54,6 @@ export class UserService {
       };
       const userSaved = await this.repository.create(user);
 
-      console.log('user.service', { userSaved });
-
       const tokens = await this.tokenService.generate({
         email: userSaved.email,
         sub: userSaved.id,

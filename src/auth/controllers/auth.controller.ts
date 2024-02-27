@@ -70,19 +70,11 @@ export class AuthController {
   })
   @Post('signup')
   async signUp(@Body() signUpDto: SignUpDto) {
-    const userData = await this.userService.register({
+    const { userData, tokens } = await this.userService.register({
       name: signUpDto.name,
       email: signUpDto.email,
       password: signUpDto.password,
     });
-
-    const tokens = this.authService.signUp(
-      signUpDto.name,
-      signUpDto.email,
-      signUpDto.password,
-    );
-
-    console.log({ userData, tokens });
 
     const response = {
       userData,
