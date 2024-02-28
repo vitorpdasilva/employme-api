@@ -1,6 +1,18 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { UserType, LocationType, GenderTypeDto } from '../enums/user.enum';
+import {
+  UserType,
+  LocationType,
+  GenderTypeDto,
+  MotivationType,
+  FiveYearsTrack,
+  WorkEnvironmentType,
+  CurrencyType,
+  CompanySize,
+  JobSearchStatus,
+  TechAndLanguagesAndTools,
+  ProfessionType,
+} from '../enums/user.enum';
 
 class UserGeneralDto {
   @ApiProperty({ type: String })
@@ -65,17 +77,29 @@ class UserCultureDto {
   @Expose()
   public lookingFor: string;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enumName: 'MotivationType',
+    enum: MotivationType,
+  })
   @Expose()
-  public motivatesMeMore: number;
+  public motivatesMeMore: string;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enumName: 'FiveYearsTrack',
+    enum: FiveYearsTrack,
+  })
   @Expose()
-  public fiveYearsCareerTrack: number;
+  public fiveYearsCareerTrack: string;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enumName: 'WorkEnvironmentType',
+    enum: WorkEnvironmentType,
+  })
   @Expose()
-  public workBetterIn: number;
+  public workBetterIn: string;
 }
 
 class UserRecolocationDto {
@@ -91,10 +115,12 @@ class UserRecolocationDto {
   @Expose()
   public salaryExpected: string;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: String, enum: CurrencyType, enumName: 'CurrencyType' })
   @Expose()
   public currency: string;
 
+  // TODO: conditional visa depending on the country
+  // should be enum with country based values
   @ApiProperty({ type: String })
   @Expose()
   public visa: string;
@@ -103,7 +129,7 @@ class UserRecolocationDto {
   @Expose()
   public validPassport: boolean;
 
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: String, enum: [CompanySize], enumName: 'CompanySize' })
   @Expose()
   public companySize: string[];
 
@@ -117,13 +143,7 @@ class UserRecolocationDto {
 }
 
 class UserJobSearchStatusDto {
-  @ApiProperty({ type: String })
-  @Expose()
-  public id: string;
-
-  @ApiProperty({ type: String })
-  @Expose()
-  public label: string;
+  jobSearchStatus: string;
 }
 
 class UserSalaryDto {
@@ -141,33 +161,34 @@ class UserSalaryDto {
 }
 
 class UserCompanySizeDto {
-  @ApiProperty({ type: String })
-  @Expose()
-  public id: string;
-
   // TODO: Change to ENUM
   @ApiProperty({ type: Number })
   @Expose()
   public option: number;
-
-  @ApiProperty({ type: String })
-  @Expose()
-  public label: string;
 }
 
 class UserPreferencesDto {
   // TODO: Change to ENUM
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enum: JobSearchStatus,
+    enumName: 'JobSearchStatus',
+  })
   @Expose()
-  public jobSearchStatus: UserJobSearchStatusDto;
+  public jobSearchStatus: string;
 
   @ApiProperty({ type: Object })
   @Expose()
   public salary: UserSalaryDto;
 
-  @ApiProperty({ type: Object })
+  @ApiProperty({
+    type: String,
+    enum: CompanySize,
+    enumName: 'CompanySize',
+    isArray: true,
+  })
   @Expose()
-  public companySize: UserCompanySizeDto;
+  public companySize: string;
 
   @ApiProperty({ type: String, isArray: true })
   @Expose()
@@ -214,9 +235,13 @@ class UserWorkExperienceDto {
 
 class UserSkillRankDto {
   // TODO: Change to ENUM
-  @ApiProperty({ type: Number })
+  @ApiProperty({
+    type: String,
+    enum: TechAndLanguagesAndTools,
+    enumName: 'TechAndLanguagesAndTools',
+  })
   @Expose()
-  public skillId: number;
+  public skill: string;
 
   @ApiProperty({ type: Number })
   @Expose()
@@ -224,7 +249,11 @@ class UserSkillRankDto {
 }
 
 class UserProfessionalDto {
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enum: ProfessionType,
+    enumName: 'ProfessionType',
+  })
   @Expose()
   public profession: string;
 
@@ -237,9 +266,13 @@ class UserProfessionalDto {
   public openToDiffRole: boolean;
 
   // TODO: CHANGE TO ENUM
-  @ApiProperty({ type: [Number] })
+  @ApiProperty({
+    type: [String],
+    enum: ProfessionType,
+    enumName: 'ProfessionType',
+  })
   @Expose()
-  public preferencesToWork: number[];
+  public preferencesToWork: string[];
 
   @ApiProperty({ type: [UserSkillRankDto] })
   @Expose()
