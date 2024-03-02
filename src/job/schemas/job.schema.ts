@@ -41,6 +41,9 @@ export class Job {
   @Prop({ type: Boolean })
   recent: boolean;
 
+  @Prop({ type: Date })
+  createdAt: Date;
+
   @Prop({ type: [String] })
   applicants: string[];
 

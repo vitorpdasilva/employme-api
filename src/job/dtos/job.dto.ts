@@ -50,7 +50,7 @@ export class JobDto {
   @Expose()
   applicants: string[];
 
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: Date })
   @Expose()
   createdAt: Date;
 

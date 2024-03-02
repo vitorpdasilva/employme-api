@@ -11,19 +11,19 @@ import { JobService } from '../services/job.service';
 import { JobDto } from '../dtos/job.dto';
 import { RegisterJobInputDto } from '../dtos/register-job.dto';
 
-@ApiTags("Job's")
+@ApiTags('Jobs')
 @Controller('job')
 export class JobController {
   constructor(private readonly service: JobService) {}
 
   @ApiOkResponse({ type: [JobDto] })
-  @Get()
+  @Get('list')
   public async list(): Promise<JobDto[]> {
     return this.service.findAll();
   }
 
   @ApiOkResponse({ type: JobDto })
-  @Post()
+  @Post('create')
   public async create(@Body() body: RegisterJobInputDto): Promise<JobDto> {
     const { title, location, locationType, salary } = body;
     if (!title || !location || !locationType || !salary) {
@@ -49,7 +49,7 @@ export class JobController {
     @Param('id') id: string,
     @Body('applicantId') applicantId: string,
   ): Promise<JobDto> {
-    console.log('parmas', id, applicantId);
+    console.log('params', id, applicantId);
     return this.service.apply(id, applicantId);
   }
 }
