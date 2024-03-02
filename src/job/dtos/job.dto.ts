@@ -52,6 +52,10 @@ export class JobDto {
 
   @ApiProperty({ type: String })
   @Expose()
+  createdAt: Date;
+
+  @ApiProperty({ type: String })
+  @Expose()
   description: string;
 
   @ApiProperty({ type: [String] })
