@@ -156,3 +156,12 @@ export enum ProfessionType {
   OTHER = 'Other',
   SOLUTIONS_ARCHITECT = 'Solutions Architect',
 }
+
+export enum SocialMedia {
+  FACEBOOK = 'Facebook',
+  TWITTER = 'Twitter',
+  LINKEDIN = 'LinkedIn',
+  GITHUB = 'GitHub',
+  INSTAGRAM = 'Instagram',
+  TIKTOK = 'TikTok',
+}

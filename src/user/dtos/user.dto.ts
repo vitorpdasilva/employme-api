@@ -12,6 +12,7 @@ import {
   JobSearchStatus,
   TechAndLanguagesAndTools,
   ProfessionType,
+  SocialMedia,
 } from '../enums/user.enum';
 
 class UserGeneralDto {
@@ -63,7 +64,7 @@ class UserEducationDto {
 }
 
 class UserSocialDto {
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: String, enum: SocialMedia, enumName: 'SocialMedia' })
   @Expose()
   public name: string;
 
@@ -131,7 +132,7 @@ class UserRecolocationDto {
 
   @ApiProperty({ type: String, enum: [CompanySize], enumName: 'CompanySize' })
   @Expose()
-  public companySize: string[];
+  public companySize: string[] = [];
 
   @ApiProperty({ type: Boolean })
   @Expose()
@@ -160,15 +161,7 @@ class UserSalaryDto {
   public periodicity: string;
 }
 
-class UserCompanySizeDto {
-  // TODO: Change to ENUM
-  @ApiProperty({ type: Number })
-  @Expose()
-  public option: number;
-}
-
 class UserPreferencesDto {
-  // TODO: Change to ENUM
   @ApiProperty({
     type: String,
     enum: JobSearchStatus,
@@ -183,14 +176,13 @@ class UserPreferencesDto {
 
   @ApiProperty({
     type: String,
-    enum: CompanySize,
+    enum: [CompanySize],
     enumName: 'CompanySize',
-    isArray: true,
   })
   @Expose()
-  public companySize: string;
+  public companySize: string[] = [];
 
-  @ApiProperty({ type: String, isArray: true })
+  @ApiProperty({ type: [String] })
   @Expose()
   public hideFromCompanies: string[];
 }
@@ -234,7 +226,6 @@ class UserWorkExperienceDto {
 }
 
 class UserSkillRankDto {
-  // TODO: Change to ENUM
   @ApiProperty({
     type: String,
     enum: TechAndLanguagesAndTools,
@@ -265,7 +256,6 @@ class UserProfessionalDto {
   @Expose()
   public openToDiffRole: boolean;
 
-  // TODO: CHANGE TO ENUM
   @ApiProperty({
     type: [String],
     enum: ProfessionType,
