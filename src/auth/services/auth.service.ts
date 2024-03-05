@@ -2,11 +2,11 @@ import {
   BadRequestException,
   Injectable,
   UnauthorizedException,
-} from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
-import { UserService } from '../../user/services/user.service';
-import { TokenOutputDto } from '../../shared/dtos/token.dto';
-import { TokenService } from './../../shared/services/token.service';
+} from '@nestjs/common'
+import * as bcrypt from 'bcrypt'
+import { UserService } from '../../user/services/user.service'
+import { TokenOutputDto } from '../../shared/dtos/token.dto'
+import { TokenService } from './../../shared/services/token.service'
 
 @Injectable()
 export class AuthService {
@@ -20,18 +20,18 @@ export class AuthService {
     password: string,
   ): Promise<TokenOutputDto> {
     if (!email) {
-      throw new BadRequestException('Email is required!');
+      throw new BadRequestException('Email is required!')
     }
     if (!password) {
-      throw new BadRequestException('Password is required!');
+      throw new BadRequestException('Password is required!')
     }
-    const user = await this.userService.findByEmail(email);
-    const match = await bcrypt.compare(password, user.passwordHash);
+    const user = await this.userService.findByEmail(email)
+    const match = await bcrypt.compare(password, user.passwordHash)
     if (!match) {
-      throw new UnauthorizedException('Invalid password!');
+      throw new UnauthorizedException('Invalid password!')
     }
-    const payload = { email: user.email, sub: user.id };
-    return this.tokenService.generate(payload);
+    const payload = { email: user.email, sub: user.id }
+    return this.tokenService.generate(payload)
   }
 
   public async signUp(
@@ -40,26 +40,26 @@ export class AuthService {
     password: string,
   ): Promise<TokenOutputDto> {
     if (!name) {
-      throw new BadRequestException('Name is required!');
+      throw new BadRequestException('Name is required!')
     }
     if (!email) {
-      throw new BadRequestException('Email is required!');
+      throw new BadRequestException('Email is required!')
     }
     if (!password) {
-      throw new BadRequestException('Password is required!');
+      throw new BadRequestException('Password is required!')
     }
     const user = await this.userService.register({
       name,
       email,
       password,
-    });
-    const payload = { email: user?.userData?.email, sub: user?.userData?.id };
-    return this.tokenService.generate(payload);
+    })
+    const payload = { email: user?.userData?.email, sub: user?.userData?.id }
+    return this.tokenService.generate(payload)
   }
 
   public async refreshToken(email: string): Promise<TokenOutputDto> {
-    const user = await this.userService.findByEmail(email);
-    const payload = { email: user.email, sub: user.id };
-    return this.tokenService.generate(payload);
+    const user = await this.userService.findByEmail(email)
+    const payload = { email: user.email, sub: user.id }
+    return this.tokenService.generate(payload)
   }
 }

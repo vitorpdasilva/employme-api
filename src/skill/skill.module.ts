@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { SkillController } from './controllers/skill.controller';
-import { SkillList, SkillSchema } from './schemas/skill.schema';
-import { SkillService } from './services/skill.service';
-import { SkillRepository } from './repositories/skill.repository';
+import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+import { SkillController } from './controllers/skill.controller'
+import { SkillList, SkillSchema } from './schemas/skill.schema'
+import { SkillService } from './services/skill.service'
+import { SkillRepository } from './repositories/skill.repository'
 
 @Module({
   imports: [

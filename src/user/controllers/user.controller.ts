@@ -1,11 +1,11 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
-import { ApiOperation, ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
+import { Body, Controller, Param, Patch, Post } from '@nestjs/common'
+import { ApiOperation, ApiTags, ApiCreatedResponse } from '@nestjs/swagger'
 import {
   RegisterUserInputDto,
   UpdateUserInputDto,
   UserWithTokensOutputDto,
-} from '../dtos/register-user.dto';
-import { UserService } from '../services/user.service';
+} from '../dtos/register-user.dto'
+import { UserService } from '../services/user.service'
 
 @ApiTags('User')
 @Controller('user')
@@ -18,7 +18,7 @@ export class UserController {
   public create(
     @Body() input: RegisterUserInputDto,
   ): Promise<UserWithTokensOutputDto> {
-    return this.service.register(input);
+    return this.service.register(input)
   }
 
   @ApiOperation({ description: 'Update a user' })
@@ -28,6 +28,6 @@ export class UserController {
     @Param('id') id: string,
     @Body() input: UpdateUserInputDto,
   ): Promise<UserWithTokensOutputDto> {
-    return await this.service.update(id, input);
+    return await this.service.update(id, input)
   }
 }

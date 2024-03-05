@@ -1,13 +1,13 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { TokenService } from '../../shared/services/token.service';
-import { UserRepository } from '../repositories/user.repository';
-import { UserService } from './user.service';
+import { Test, TestingModule } from '@nestjs/testing'
+import { TokenService } from '../../shared/services/token.service'
+import { UserRepository } from '../repositories/user.repository'
+import { UserService } from './user.service'
 
-const mockTokenService = {};
-const mockUserRepository = {};
+const mockTokenService = {}
+const mockUserRepository = {}
 
 describe('UserService', () => {
-  let service: UserService;
+  let service: UserService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,12 +22,12 @@ describe('UserService', () => {
           useValue: mockUserRepository,
         },
       ],
-    }).compile();
+    }).compile()
 
-    service = module.get<UserService>(UserService);
-  });
+    service = module.get<UserService>(UserService)
+  })
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+    expect(service).toBeDefined()
+  })
+})

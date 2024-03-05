@@ -1,256 +1,256 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, SchemaTypes, Types } from 'mongoose';
-import { UserType } from '../enums/user.enum';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
+import { UserType } from '../enums/user.enum'
 
-export type UserDocument = HydratedDocument<User>;
+export type UserDocument = HydratedDocument<User>
 
 @Schema({ _id: false })
 class UserGeneral {
   @Prop({ type: String })
-  citizenship_code: string;
+  citizenship_code: string
 
   @Prop({ type: String })
-  gender: string;
+  gender: string
 
   @Prop({ type: String })
-  currentLocation: string;
+  currentLocation: string
 
   @Prop({ type: String })
-  phone: string;
+  phone: string
 
   @Prop({ type: String })
-  bio: string;
+  bio: string
 }
 
 @Schema({ _id: false })
 class UserWorkExperience {
   @Prop({ type: String })
-  id: string;
+  id: string
 
   @Prop({ type: String })
-  title: string;
+  title: string
 
   @Prop({ type: String })
-  company: string;
+  company: string
 
   @Prop({ type: String })
-  location: string;
+  location: string
 
   @Prop({ type: Date })
-  startDate: Date;
+  startDate: Date
 
   @Prop({ type: Date })
-  endDate: Date;
+  endDate: Date
 
   @Prop({ type: String })
-  description: string;
+  description: string
 }
 
 @Schema({ _id: false })
 class UserSkillRank {
   @Prop({ type: String })
-  skillId: string;
+  skillId: string
 
   @Prop({ type: Number })
-  yearsOfExp: number;
+  yearsOfExp: number
 }
 
 @Schema({ _id: false })
 class UserProfessional {
   @Prop({ type: Number })
-  profession: number;
+  profession: number
 
   @Prop({ type: Number })
-  yearsOfExp: number;
+  yearsOfExp: number
 
   @Prop({ type: Boolean })
-  openToDiffRole: boolean;
+  openToDiffRole: boolean
 
   @Prop({ type: [Number] })
-  preferencesToWork: number[];
+  preferencesToWork: number[]
 
   @Prop({ type: UserSkillRank })
-  skillsRank: UserSkillRank[];
+  skillsRank: UserSkillRank[]
 
   @Prop({ type: UserWorkExperience })
-  workExperiences: UserWorkExperience[];
+  workExperiences: UserWorkExperience[]
 }
 
 @Schema({ _id: false })
 class UserRecolocation {
   @Prop({ type: Boolean })
-  openToRemote: boolean;
+  openToRemote: boolean
 
   @Prop({ type: String })
-  relocateOptions: string;
+  relocateOptions: string
 
   @Prop({ type: Number })
-  cadSalaryExpect: number;
+  cadSalaryExpect: number
 
   @Prop({ type: Number })
-  canadianVisa: number;
+  canadianVisa: number
 
   @Prop({ type: Number })
-  usdSalaryExpect: number;
+  usdSalaryExpect: number
 
   @Prop({ type: Boolean })
-  validPassport: boolean;
+  validPassport: boolean
 
   @Prop({ type: [String] })
-  companySize: string[];
+  companySize: string[]
 
   @Prop({ type: Boolean })
-  activelyLooking: boolean;
+  activelyLooking: boolean
 
   @Prop({ type: Number })
-  noticePeriod: number;
+  noticePeriod: number
 }
 
 @Schema({ _id: false })
 class UserJobSearchStatus {
   @Prop({ type: String })
-  id: string;
+  id: string
 
   @Prop({ type: String })
-  label: string;
+  label: string
 }
 
 @Schema({ _id: false })
 class UserSalary {
   @Prop({ type: String })
-  currency: string;
+  currency: string
 
   @Prop({ type: String })
-  amount: string;
+  amount: string
 
   @Prop({ type: String })
-  periodicity: string;
+  periodicity: string
 }
 
 @Schema({ _id: false })
 class UserCompanySize {
   @Prop({ type: Number })
-  id: number;
+  id: number
 
   @Prop({ type: Number })
-  option: number;
+  option: number
 
   @Prop({ type: String })
-  label: string;
+  label: string
 }
 
 @Schema({ _id: false })
 class UserPreferences {
   @Prop({ type: UserJobSearchStatus })
-  jobSearchStatus: UserJobSearchStatus;
+  jobSearchStatus: UserJobSearchStatus
 
   @Prop({ type: UserSalary })
-  salary: UserSalary;
+  salary: UserSalary
 
   @Prop({ type: UserCompanySize })
-  companySize: UserCompanySize;
+  companySize: UserCompanySize
 
   @Prop({ type: [String] })
-  hideFromCompanies: string[];
+  hideFromCompanies: string[]
 }
 
 @Schema({ _id: false })
 class UserCulture {
   @Prop({ type: String })
-  lookingFor: string;
+  lookingFor: string
 
   @Prop({ type: Number })
-  motivatesMeMore: number;
+  motivatesMeMore: number
 
   @Prop({ type: Number })
-  fiveYearsCareerTrack: number;
+  fiveYearsCareerTrack: number
 
   @Prop({ type: Number })
-  workBetterIn: number;
+  workBetterIn: number
 }
 
 @Schema({ _id: false })
 class UserSocial {
   @Prop({ type: String })
-  name: string;
+  name: string
 
   @Prop({ type: String })
-  url: string;
+  url: string
 }
-const UserSocialSchema = SchemaFactory.createForClass(UserSocial);
+const UserSocialSchema = SchemaFactory.createForClass(UserSocial)
 
 @Schema({ _id: false })
 class UserEducation {
   @Prop({ type: String })
-  school: string;
+  school: string
 
   @Prop({ type: String })
-  degree: string;
+  degree: string
 
   @Prop({ type: String })
-  fieldOfStudy: string;
+  fieldOfStudy: string
 
   @Prop({ type: Date })
-  startDate: Date;
+  startDate: Date
 
   @Prop({ type: Date })
-  endDate: Date;
+  endDate: Date
 
   @Prop({ type: String })
-  description: string;
+  description: string
 }
 
-const UserEducationSchema = SchemaFactory.createForClass(UserEducation);
+const UserEducationSchema = SchemaFactory.createForClass(UserEducation)
 
 @Schema()
 export class User {
   @Prop({ type: SchemaTypes.ObjectId, auto: true })
-  id: Types.ObjectId;
+  id: Types.ObjectId
 
   @Prop({ unique: true })
-  email: string;
+  email: string
 
   @Prop({ type: String })
-  passwordHash: string;
+  passwordHash: string
 
   @Prop({ type: String })
-  name: string;
+  name: string
 
   @Prop({ type: String })
-  username: string;
+  username: string
 
   @Prop({ type: String })
-  picture: string;
+  picture: string
 
   @Prop({ default: 0, type: Number })
-  accessCount: number;
+  accessCount: number
 
   @Prop({ type: String, enum: UserType, default: UserType.CANDIDATE })
-  type: UserType;
+  type: UserType
 
   @Prop({ type: UserGeneral })
-  general: UserGeneral;
+  general: UserGeneral
 
   @Prop({ type: [String] })
-  jobsApplied: string[];
+  jobsApplied: string[]
 
   @Prop({ type: UserProfessional })
-  professional: UserProfessional;
+  professional: UserProfessional
 
   @Prop({ type: UserRecolocation })
-  relocation: UserRecolocation;
+  relocation: UserRecolocation
 
   @Prop({ type: UserPreferences })
-  preferences: UserPreferences;
+  preferences: UserPreferences
 
   @Prop({ type: UserCulture })
-  culture: UserCulture;
+  culture: UserCulture
 
   @Prop({ type: [UserSocialSchema] })
-  social: [UserSocial];
+  social: [UserSocial]
 
   @Prop({ type: [UserEducationSchema] })
-  education: UserEducation[];
+  education: UserEducation[]
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User)

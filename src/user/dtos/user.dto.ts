@@ -1,5 +1,5 @@
-import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { ApiProperty, OmitType } from '@nestjs/swagger'
+import { Expose } from 'class-transformer'
 import {
   UserType,
   LocationType,
@@ -13,70 +13,70 @@ import {
   TechAndLanguagesAndTools,
   ProfessionType,
   SocialMedia,
-} from '../enums/user.enum';
+} from '../enums/user.enum'
 
 class UserGeneralDto {
   @ApiProperty({ type: String })
   @Expose()
-  public citizenshipCode: string;
+  public citizenshipCode: string
 
   @ApiProperty({ type: String, enumName: 'GenderTypeDto', enum: GenderTypeDto })
   @Expose()
-  public gender: GenderTypeDto;
+  public gender: GenderTypeDto
 
   @ApiProperty({ type: String })
   @Expose()
-  public currentLocation: string;
+  public currentLocation: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public phone: string;
+  public phone: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public bio: string;
+  public bio: string
 }
 
 class UserEducationDto {
   @ApiProperty({ type: String })
   @Expose()
-  public school: string;
+  public school: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public degree: string;
+  public degree: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public fieldOfStudy: string;
+  public fieldOfStudy: string
 
   @ApiProperty({ type: Date })
   @Expose()
-  public startDate: Date;
+  public startDate: Date
 
   @ApiProperty({ type: Date })
   @Expose()
-  public endDate: Date;
+  public endDate: Date
 
   @ApiProperty({ type: String })
   @Expose()
-  public description: string;
+  public description: string
 }
 
 class UserSocialDto {
   @ApiProperty({ type: String, enum: SocialMedia, enumName: 'SocialMedia' })
   @Expose()
-  public name: string;
+  public name: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public url: string;
+  public url: string
 }
 
 class UserCultureDto {
   @ApiProperty({ type: String })
   @Expose()
-  public lookingFor: string;
+  public lookingFor: string
 
   @ApiProperty({
     type: String,
@@ -84,7 +84,7 @@ class UserCultureDto {
     enum: MotivationType,
   })
   @Expose()
-  public motivatesMeMore: string;
+  public motivatesMeMore: string
 
   @ApiProperty({
     type: String,
@@ -92,7 +92,7 @@ class UserCultureDto {
     enum: FiveYearsTrack,
   })
   @Expose()
-  public fiveYearsCareerTrack: string;
+  public fiveYearsCareerTrack: string
 
   @ApiProperty({
     type: String,
@@ -100,65 +100,65 @@ class UserCultureDto {
     enum: WorkEnvironmentType,
   })
   @Expose()
-  public workBetterIn: string;
+  public workBetterIn: string
 }
 
 class UserRecolocationDto {
   @ApiProperty({ type: String })
   @Expose()
-  public openToRemote: boolean;
+  public openToRemote: boolean
 
   @ApiProperty({ type: String })
   @Expose()
-  public relocateOptions: string;
+  public relocateOptions: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public salaryExpected: string;
+  public salaryExpected: string
 
   @ApiProperty({ type: String, enum: CurrencyType, enumName: 'CurrencyType' })
   @Expose()
-  public currency: string;
+  public currency: string
 
   // TODO: conditional visa depending on the country
   // should be enum with country based values
   @ApiProperty({ type: String })
   @Expose()
-  public visa: string;
+  public visa: string
 
   @ApiProperty({ type: Boolean })
   @Expose()
-  public validPassport: boolean;
+  public validPassport: boolean
 
   @ApiProperty({ type: String, enum: [CompanySize], enumName: 'CompanySize' })
   @Expose()
-  public companySize: string[] = [];
+  public companySize: string[] = []
 
   @ApiProperty({ type: Boolean })
   @Expose()
-  public activelyLooking: boolean;
+  public activelyLooking: boolean
 
   @ApiProperty({ type: String })
   @Expose()
-  public noticePeriod: string;
+  public noticePeriod: string
 }
 
 class UserJobSearchStatusDto {
-  jobSearchStatus: string;
+  jobSearchStatus: string
 }
 
 class UserSalaryDto {
   @ApiProperty({ type: String })
   @Expose()
-  public currency: string;
+  public currency: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public amount: string;
+  public amount: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public periodicity: string;
+  public periodicity: string
 }
 
 class UserPreferencesDto {
@@ -168,11 +168,11 @@ class UserPreferencesDto {
     enumName: 'JobSearchStatus',
   })
   @Expose()
-  public jobSearchStatus: string;
+  public jobSearchStatus: string
 
   @ApiProperty({ type: Object })
   @Expose()
-  public salary: UserSalaryDto;
+  public salary: UserSalaryDto
 
   @ApiProperty({
     type: String,
@@ -180,49 +180,49 @@ class UserPreferencesDto {
     enumName: 'CompanySize',
   })
   @Expose()
-  public companySize: string[] = [];
+  public companySize: string[] = []
 
   @ApiProperty({ type: [String] })
   @Expose()
-  public hideFromCompanies: string[];
+  public hideFromCompanies: string[]
 }
 
 class UserWorkExperienceDto {
   @ApiProperty({ type: String })
   @Expose()
-  public id: string;
+  public id: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public title: string;
+  public title: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public company: string;
+  public company: string
 
   @ApiProperty({ type: String, enum: LocationType, enumName: 'LocationType' })
   @Expose()
-  public locationType: LocationType;
+  public locationType: LocationType
 
   @ApiProperty({ type: String })
   @Expose()
-  public location: string;
+  public location: string
 
   @ApiProperty({ type: Date })
   @Expose()
-  public startDate: Date;
+  public startDate: Date
 
   @ApiProperty({ type: Boolean })
   @Expose()
-  public current: boolean;
+  public current: boolean
 
   @ApiProperty({ type: Date })
   @Expose()
-  public endDate: Date;
+  public endDate: Date
 
   @ApiProperty({ type: String })
   @Expose()
-  public description: string;
+  public description: string
 }
 
 class UserSkillRankDto {
@@ -232,11 +232,11 @@ class UserSkillRankDto {
     enumName: 'TechAndLanguagesAndTools',
   })
   @Expose()
-  public skill: string;
+  public skill: string
 
   @ApiProperty({ type: Number })
   @Expose()
-  public yearsOfExp: number;
+  public yearsOfExp: number
 }
 
 class UserProfessionalDto {
@@ -246,15 +246,15 @@ class UserProfessionalDto {
     enumName: 'ProfessionType',
   })
   @Expose()
-  public profession: string;
+  public profession: string
 
   @ApiProperty({ type: Number })
   @Expose()
-  public yearsOfExperience: number;
+  public yearsOfExperience: number
 
   @ApiProperty({ type: Boolean })
   @Expose()
-  public openToDiffRole: boolean;
+  public openToDiffRole: boolean
 
   @ApiProperty({
     type: [String],
@@ -262,32 +262,32 @@ class UserProfessionalDto {
     enumName: 'ProfessionType',
   })
   @Expose()
-  public preferencesToWork: string[];
+  public preferencesToWork: string[]
 
   @ApiProperty({ type: [UserSkillRankDto] })
   @Expose()
-  public skillsRank: UserSkillRankDto[];
+  public skillsRank: UserSkillRankDto[]
 
   @ApiProperty({
     description: 'Work Experiences',
     type: [UserWorkExperienceDto],
   })
   @Expose()
-  public workExperiences: UserWorkExperienceDto[];
+  public workExperiences: UserWorkExperienceDto[]
 }
 
 export class UserDto {
   @ApiProperty({ required: true, description: 'ID', uniqueItems: true })
   @Expose()
-  public id: string;
+  public id: string
 
   @ApiProperty({ required: true, description: 'Email' })
   @Expose()
-  public email: string;
+  public email: string
 
   @ApiProperty({ required: true, description: 'Password Hash' })
   @Expose()
-  public passwordHash: string;
+  public passwordHash: string
 
   @ApiProperty({
     description: 'UserType',
@@ -295,55 +295,55 @@ export class UserDto {
     enum: UserType,
   })
   @Expose()
-  public type: UserType;
+  public type: UserType
 
   @ApiProperty({ description: 'Name' })
   @Expose()
-  public name: string;
+  public name: string
 
   @ApiProperty({ description: 'Access Count' })
   @Expose()
-  public accessCount: number = 0;
+  public accessCount = 0
 
   @ApiProperty({ description: 'Username' })
   @Expose()
-  public username: string;
+  public username: string
 
   @ApiProperty({ description: 'Picture' })
   @Expose()
-  public picture: string;
+  public picture: string
 
   @ApiProperty({ description: 'Jobs Applied' })
   @Expose()
-  public jobsApplied: string[];
+  public jobsApplied: string[]
 
   @ApiProperty({ description: 'General User Info' })
   @Expose()
-  public general: UserGeneralDto;
+  public general: UserGeneralDto
 
   @ApiProperty({ description: 'Professional User Info' })
   @Expose()
-  public professional: UserProfessionalDto;
+  public professional: UserProfessionalDto
 
   @ApiProperty({ description: 'Relocation User Info' })
   @Expose()
-  public relocation: UserRecolocationDto;
+  public relocation: UserRecolocationDto
 
   @ApiProperty({ description: 'Preferences User Info' })
   @Expose()
-  public preferences: UserPreferencesDto;
+  public preferences: UserPreferencesDto
 
   @ApiProperty({ description: 'Culture User Info' })
   @Expose()
-  public culture: UserCultureDto;
+  public culture: UserCultureDto
 
   @ApiProperty({ description: 'Social User Info' })
   @Expose()
-  public social: UserSocialDto[] = [];
+  public social: UserSocialDto[] = []
 
   @ApiProperty({ description: 'Education User Info' })
   @Expose()
-  public education: UserEducationDto[] = [];
+  public education: UserEducationDto[] = []
 }
 
 export class UserOutputDto extends OmitType(UserDto, ['passwordHash']) {}

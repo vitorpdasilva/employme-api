@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { UserService } from './services/user.service';
-import { UserController } from './controllers/user.controller';
-import { UserRepository } from './repositories/user.repository';
-import { User, UserSchema } from './schemas/user.schema';
-import { SharedModule } from '../shared/shared.module';
+import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+import { UserService } from './services/user.service'
+import { UserController } from './controllers/user.controller'
+import { UserRepository } from './repositories/user.repository'
+import { User, UserSchema } from './schemas/user.schema'
+import { SharedModule } from '../shared/shared.module'
 
 @Module({
   imports: [
