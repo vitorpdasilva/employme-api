@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { UserService } from '../../user/services/user.service';
-import { JobRepository } from '../repositories/job.repository';
-import { JobDto } from '../dtos/job.dto';
-import { RegisterJobInputDto } from '../dtos/register-job.dto';
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { UserService } from '../../user/services/user.service'
+import { JobRepository } from '../repositories/job.repository'
+import { JobDto } from '../dtos/job.dto'
+import { RegisterJobInputDto } from '../dtos/register-job.dto'
 
 @Injectable()
 export class JobService {
@@ -12,28 +12,28 @@ export class JobService {
   ) {}
 
   public findAll(): Promise<JobDto[]> {
-    return this.repository.findAll();
+    return this.repository.findAll()
   }
 
   public async findById(id: string): Promise<JobDto> {
-    const job = await this.repository.findById(id);
+    const job = await this.repository.findById(id)
     if (!job) {
-      throw new NotFoundException('Job not found');
+      throw new NotFoundException('Job not found')
     }
-    return job;
+    return job
   }
 
   public save(jobInput: RegisterJobInputDto): Promise<JobDto> {
-    return this.repository.create(jobInput);
+    return this.repository.create(jobInput)
   }
 
   public async apply(jobId: string, applicantId: string): Promise<JobDto> {
     const [job, user] = await Promise.all([
       this.findById(jobId),
       this.userService.findById(applicantId),
-    ]);
-    const jobSaved = await this.repository.addApplicant(job, user.id);
-    await this.userService.updateAppliedJob(user, jobSaved.id);
-    return jobSaved;
+    ])
+    const jobSaved = await this.repository.addApplicant(job, user.id)
+    await this.userService.updateAppliedJob(user, jobSaved.id)
+    return jobSaved
   }
 }

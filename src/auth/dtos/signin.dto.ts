@@ -1,23 +1,23 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger'
 
 export class SignInDto {
   @ApiProperty({ required: true, description: 'Email' })
-  email: string;
+  email: string
 
   @ApiProperty({ required: true, description: 'Password' })
-  password: string;
+  password: string
 }
 
 export class ProfileOutputDto {
   @ApiProperty({ required: true, description: 'Email' })
-  email: string;
+  email: string
 
   @ApiProperty({ required: true, description: 'Sub' })
-  sub: string;
+  sub: string
 
   @ApiProperty({ required: true, description: 'IAT' })
-  iat: number;
+  iat: number
 
   @ApiProperty({ required: true, description: 'EXP' })
-  exp: number;
+  exp: number
 }

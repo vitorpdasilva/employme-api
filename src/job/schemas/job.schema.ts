@@ -1,66 +1,66 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import { HydratedDocument, Types } from 'mongoose'
 
-export type JobDocument = HydratedDocument<Job>;
+export type JobDocument = HydratedDocument<Job>
 
 @Schema({ _id: false })
 export class Location {
   @Prop({ type: String })
-  city: string;
+  city: string
 
   @Prop({ type: String })
-  country: string;
+  country: string
 
   @Prop({ type: String })
-  province: string;
+  province: string
 }
 
 @Schema({ _id: false })
 export class Salary {
   @Prop({ type: Number })
-  from: number;
+  from: number
 
   @Prop({ type: Number })
-  to: number;
+  to: number
 
   @Prop({ type: String })
-  currency: string;
+  currency: string
 
   @Prop({ type: String })
-  period: string;
+  period: string
 }
 
 @Schema({ timestamps: true })
 export class Job {
   @Prop({ alias: '_id', auto: true })
-  id: Types.ObjectId;
+  id: Types.ObjectId
 
   @Prop({ type: String })
-  title: string;
+  title: string
 
   @Prop({ type: Boolean })
-  recent: boolean;
+  recent: boolean
 
   @Prop({ type: Date })
-  createdAt: Date;
+  createdAt: Date
 
   @Prop({ type: [String] })
-  applicants: string[];
+  applicants: string[]
 
   @Prop({ type: String })
-  description: string;
+  description: string
 
   @Prop({ type: [String] })
-  tags: string[];
+  tags: string[]
 
   @Prop({ type: String })
-  locationType: string;
+  locationType: string
 
   @Prop({ type: Location })
-  location: Location;
+  location: Location
 
   @Prop({ type: Salary })
-  salary: Salary;
+  salary: Salary
 }
 
-export const JobSchema = SchemaFactory.createForClass(Job);
+export const JobSchema = SchemaFactory.createForClass(Job)

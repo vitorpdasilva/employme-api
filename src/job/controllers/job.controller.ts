@@ -5,11 +5,11 @@ import {
   Get,
   Param,
   Post,
-} from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { JobService } from '../services/job.service';
-import { JobDto } from '../dtos/job.dto';
-import { RegisterJobInputDto } from '../dtos/register-job.dto';
+} from '@nestjs/common'
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
+import { JobService } from '../services/job.service'
+import { JobDto } from '../dtos/job.dto'
+import { RegisterJobInputDto } from '../dtos/register-job.dto'
 
 @ApiTags('Jobs')
 @Controller('job')
@@ -19,23 +19,23 @@ export class JobController {
   @ApiOkResponse({ type: [JobDto] })
   @Get('list')
   public async list(): Promise<JobDto[]> {
-    return this.service.findAll();
+    return this.service.findAll()
   }
 
   @ApiOkResponse({ type: JobDto })
   @Post('create')
   public async create(@Body() body: RegisterJobInputDto): Promise<JobDto> {
-    const { title, location, locationType, salary } = body;
+    const { title, location, locationType, salary } = body
     if (!title || !location || !locationType || !salary) {
-      throw new BadRequestException('One of the required fields is missing');
+      throw new BadRequestException('One of the required fields is missing')
     }
-    return this.service.save(body);
+    return this.service.save(body)
   }
 
   @ApiOkResponse({ type: JobDto })
   @Get(':id')
   public async getOne(@Param('id') id: string): Promise<JobDto> {
-    return this.service.findById(id);
+    return this.service.findById(id)
   }
 
   /**
@@ -49,7 +49,7 @@ export class JobController {
     @Param('id') id: string,
     @Body('applicantId') applicantId: string,
   ): Promise<JobDto> {
-    console.log('params', id, applicantId);
-    return this.service.apply(id, applicantId);
+    console.log('params', id, applicantId)
+    return this.service.apply(id, applicantId)
   }
 }

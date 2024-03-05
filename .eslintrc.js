@@ -15,7 +15,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js', 'types.ts'],
   rules: {
     semi: ['error', 'never'],
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -23,6 +23,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'no-console': 'off',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
   },
-  exclude: ['types.ts'],
-};
+}

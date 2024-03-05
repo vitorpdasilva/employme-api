@@ -1,76 +1,76 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger'
+import { Expose } from 'class-transformer'
 
 class LocationDto {
   @ApiProperty({ type: String })
   @Expose()
-  city: string;
+  city: string
 
   @ApiProperty({ type: String })
   @Expose()
-  country: string;
+  country: string
 
   @ApiProperty({ type: String })
   @Expose()
-  province: string;
+  province: string
 }
 
 class SalaryDto {
   @ApiProperty({ type: Number })
   @Expose()
-  from: number;
+  from: number
 
   @ApiProperty({ type: Number })
   @Expose()
-  to: number;
+  to: number
 
   @ApiProperty({ type: String })
   @Expose()
-  currency: string;
+  currency: string
 
   @ApiProperty({ type: String })
   @Expose()
-  period: string;
+  period: string
 }
 
 export class JobDto {
   @ApiProperty({ type: String })
   @Expose()
-  id: string;
+  id: string
 
   @ApiProperty({ type: String })
   @Expose()
-  title: string;
+  title: string
 
   @ApiProperty({ type: Boolean })
   @Expose()
-  recent: boolean;
+  recent: boolean
 
   @ApiProperty({ type: [String] })
   @Expose()
-  applicants: string[];
+  applicants: string[]
 
   @ApiProperty({ type: Date })
   @Expose()
-  createdAt: Date;
+  createdAt: Date
 
   @ApiProperty({ type: String })
   @Expose()
-  description: string;
+  description: string
 
   @ApiProperty({ type: [String] })
   @Expose()
-  tags: string[];
+  tags: string[]
 
   @ApiProperty({ type: String })
   @Expose()
-  locationType: string;
+  locationType: string
 
   @ApiProperty({ type: LocationDto })
   @Expose()
-  location: LocationDto;
+  location: LocationDto
 
   @ApiProperty({ type: SalaryDto })
   @Expose()
-  salary: SalaryDto;
+  salary: SalaryDto
 }
