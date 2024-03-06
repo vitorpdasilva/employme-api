@@ -166,6 +166,7 @@ class UserPreferencesDto {
     type: String,
     enum: JobSearchStatus,
     enumName: 'JobSearchStatus',
+    nullable: true,
   })
   @Expose()
   public jobSearchStatus: string
