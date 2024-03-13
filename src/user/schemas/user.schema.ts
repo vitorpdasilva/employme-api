@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
-import { UserType } from '../enums/user.enum'
+import { UserType, JobSearchStatus } from '../enums/user.enum'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -107,15 +107,6 @@ class UserRecolocation {
 }
 
 @Schema({ _id: false })
-class UserJobSearchStatus {
-  @Prop({ type: String })
-  id: string
-
-  @Prop({ type: String })
-  label: string
-}
-
-@Schema({ _id: false })
 class UserSalary {
   @Prop({ type: String })
   currency: string
@@ -141,8 +132,12 @@ class UserCompanySize {
 
 @Schema({ _id: false })
 class UserPreferences {
-  @Prop({ type: UserJobSearchStatus })
-  jobSearchStatus: UserJobSearchStatus
+  @Prop({
+    type: String,
+    enum: JobSearchStatus,
+    default: JobSearchStatus.ACTIVE,
+  })
+  jobSearchStatus: string
 
   @Prop({ type: UserSalary })
   salary: UserSalary

@@ -111,9 +111,9 @@ export enum CompanySize {
 }
 
 export enum JobSearchStatus {
-  ACTIVE = 'Active',
-  OPEN = 'Open',
-  CLOSED = 'Closed',
+  ACTIVE = 'ACTIVE',
+  OPEN = 'OPEN',
+  CLOSED = 'CLOSED',
 }
 
 export enum ProfessionType {

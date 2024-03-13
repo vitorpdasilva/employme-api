@@ -143,10 +143,6 @@ class UserRecolocationDto {
   public noticePeriod: string
 }
 
-class UserJobSearchStatusDto {
-  jobSearchStatus: string
-}
-
 class UserSalaryDto {
   @ApiProperty({ type: String })
   @Expose()
@@ -163,13 +159,11 @@ class UserSalaryDto {
 
 class UserPreferencesDto {
   @ApiProperty({
-    type: String,
     enum: JobSearchStatus,
     enumName: 'JobSearchStatus',
-    nullable: true,
   })
   @Expose()
-  public jobSearchStatus: string
+  public jobSearchStatus: string = JobSearchStatus.ACTIVE
 
   @ApiProperty({ type: Object })
   @Expose()
