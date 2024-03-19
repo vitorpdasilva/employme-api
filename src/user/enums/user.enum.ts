@@ -9,7 +9,7 @@ export enum LocationType {
   ONSITE = 'Onsite',
 }
 
-export enum GenderTypeDto {
+export enum GenderType {
   MALE = 'Male',
   FEMALE = 'Female',
   OTHER = 'Other',

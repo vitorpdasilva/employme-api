@@ -3,7 +3,7 @@ import { Expose } from 'class-transformer'
 import {
   UserType,
   LocationType,
-  GenderTypeDto,
+  GenderType,
   MotivationType,
   FiveYearsTrack,
   WorkEnvironmentType,
@@ -16,25 +16,21 @@ import {
 } from '../enums/user.enum'
 
 class UserGeneralDto {
-  @ApiProperty({ type: String })
+  @ApiProperty({
+    type: String,
+    enumName: 'GenderType',
+    enum: GenderType,
+  })
   @Expose()
-  public citizenshipCode: string
-
-  @ApiProperty({ type: String, enumName: 'GenderTypeDto', enum: GenderTypeDto })
-  @Expose()
-  public gender: GenderTypeDto
-
-  @ApiProperty({ type: String })
-  @Expose()
-  public currentLocation: string
+  public gender?: GenderType
 
   @ApiProperty({ type: String })
   @Expose()
-  public phone: string
+  public currentLocation?: string
 
   @ApiProperty({ type: String })
   @Expose()
-  public bio: string
+  public bio?: string
 }
 
 class UserEducationDto {
@@ -271,6 +267,16 @@ class UserProfessionalDto {
   public workExperiences: UserWorkExperienceDto[]
 }
 
+export class ProfilePictureDto {
+  @ApiProperty({ type: String })
+  @Expose()
+  public data: string
+
+  @ApiProperty({ type: Date })
+  @Expose()
+  public createdAt: Date
+}
+
 export class UserDto {
   @ApiProperty({ required: true, description: 'ID', uniqueItems: true })
   @Expose()
@@ -304,9 +310,9 @@ export class UserDto {
   @Expose()
   public username: string
 
-  @ApiProperty({ description: 'Picture' })
+  @ApiProperty({ description: 'User Profile Picture' })
   @Expose()
-  public picture: string
+  public picture: ProfilePictureDto
 
   @ApiProperty({ description: 'Jobs Applied' })
   @Expose()

@@ -1,25 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { HydratedDocument, SchemaTypes, Types } from 'mongoose'
-import { UserType, JobSearchStatus } from '../enums/user.enum'
+import {
+  UserType,
+  JobSearchStatus,
+  ProfessionType,
+  GenderType,
+} from '../enums/user.enum'
+import { ProfilePictureDto } from '../dtos/user.dto'
 
 export type UserDocument = HydratedDocument<User>
 
 @Schema({ _id: false })
 class UserGeneral {
-  @Prop({ type: String })
-  citizenship_code: string
+  @Prop({ type: String, enum: GenderType })
+  gender?: GenderType
 
   @Prop({ type: String })
-  gender: string
+  currentLocation?: string
 
   @Prop({ type: String })
-  currentLocation: string
-
-  @Prop({ type: String })
-  phone: string
-
-  @Prop({ type: String })
-  bio: string
+  bio?: string
 }
 
 @Schema({ _id: false })
@@ -57,8 +57,11 @@ class UserSkillRank {
 
 @Schema({ _id: false })
 class UserProfessional {
-  @Prop({ type: Number })
-  profession: number
+  @Prop({
+    type: String,
+    enum: ProfessionType,
+  })
+  profession: ProfessionType
 
   @Prop({ type: Number })
   yearsOfExp: number
@@ -66,8 +69,8 @@ class UserProfessional {
   @Prop({ type: Boolean })
   openToDiffRole: boolean
 
-  @Prop({ type: [Number] })
-  preferencesToWork: number[]
+  @Prop({ type: [String] })
+  preferencesToWork: string[]
 
   @Prop({ type: UserSkillRank })
   skillsRank: UserSkillRank[]
@@ -214,8 +217,8 @@ export class User {
   @Prop({ type: String })
   username: string
 
-  @Prop({ type: String })
-  picture: string
+  @Prop({ type: ProfilePictureDto })
+  picture: ProfilePictureDto
 
   @Prop({ default: 0, type: Number })
   accessCount: number
