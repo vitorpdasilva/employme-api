@@ -5,6 +5,7 @@ import {
   JobSearchStatus,
   ProfessionType,
   GenderType,
+  SocialMedia,
 } from '../enums/user.enum'
 import { ProfilePictureDto } from '../dtos/user.dto'
 
@@ -76,7 +77,7 @@ class UserProfessional {
   skillsRank: UserSkillRank[]
 
   @Prop({ type: UserWorkExperience })
-  workExperiences: UserWorkExperience[]
+  workExperiences: UserWorkExperience[] = []
 }
 
 @Schema({ _id: false })
@@ -169,8 +170,8 @@ class UserCulture {
 
 @Schema({ _id: false })
 class UserSocial {
-  @Prop({ type: String })
-  name: string
+  @Prop({ type: String, enum: SocialMedia })
+  name: SocialMedia
 
   @Prop({ type: String })
   url: string
@@ -244,10 +245,10 @@ export class User {
   @Prop({ type: UserCulture })
   culture: UserCulture
 
-  @Prop({ type: [UserSocialSchema] })
-  social: [UserSocial]
+  @Prop({ type: UserSocial, default: [] })
+  social: UserSocial[]
 
-  @Prop({ type: [UserEducationSchema] })
+  @Prop({ type: UserEducation, default: [] })
   education: UserEducation[]
 }
 

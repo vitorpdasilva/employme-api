@@ -160,8 +160,8 @@ export enum ProfessionType {
 export enum SocialMedia {
   FACEBOOK = 'Facebook',
   TWITTER = 'Twitter',
-  LINKEDIN = 'LinkedIn',
-  GITHUB = 'GitHub',
+  LINKEDIN = 'Linkedin',
+  GITHUB = 'Github',
   INSTAGRAM = 'Instagram',
-  TIKTOK = 'TikTok',
+  TIKTOK = 'Tiktok',
 }

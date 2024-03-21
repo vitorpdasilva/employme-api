@@ -62,7 +62,7 @@ class UserEducationDto {
 class UserSocialDto {
   @ApiProperty({ type: String, enum: SocialMedia, enumName: 'SocialMedia' })
   @Expose()
-  public name: string
+  public name: SocialMedia
 
   @ApiProperty({ type: String })
   @Expose()
@@ -338,13 +338,13 @@ export class UserDto {
   @Expose()
   public culture: UserCultureDto
 
-  @ApiProperty({ description: 'Social User Info' })
+  @ApiProperty({ description: 'Social Media User Info', type: [UserSocialDto] })
   @Expose()
   public social: UserSocialDto[] = []
 
-  @ApiProperty({ description: 'Education User Info' })
+  @ApiProperty({ description: 'Education User Info', type: [UserEducationDto] })
   @Expose()
-  public education: UserEducationDto[] = []
+  public education: UserEducationDto[]
 }
 
 export class UserOutputDto extends OmitType(UserDto, ['passwordHash']) {}
