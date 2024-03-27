@@ -7,7 +7,7 @@ import {
   GenderType,
   SocialMedia,
 } from '../enums/user.enum'
-import { ProfilePictureDto } from '../dtos/user.dto'
+import { ProfilePictureDto, UserProfessionalDto } from '../dtos/user.dto'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -54,30 +54,6 @@ class UserSkillRank {
 
   @Prop({ type: Number })
   yearsOfExp: number
-}
-
-@Schema({ _id: false })
-class UserProfessional {
-  @Prop({
-    type: String,
-    enum: ProfessionType,
-  })
-  profession: ProfessionType
-
-  @Prop({ type: Number })
-  yearsOfExp: number
-
-  @Prop({ type: Boolean })
-  openToDiffRole: boolean
-
-  @Prop({ type: [String] })
-  preferencesToWork: string[]
-
-  @Prop({ type: UserSkillRank })
-  skillsRank: UserSkillRank[]
-
-  @Prop({ type: UserWorkExperience })
-  workExperience: UserWorkExperience[] = []
 }
 
 @Schema({ _id: false })
@@ -233,8 +209,8 @@ export class User {
   @Prop({ type: [String] })
   jobsApplied: string[]
 
-  @Prop({ type: UserProfessional })
-  professional: UserProfessional
+  @Prop({ type: UserProfessionalDto })
+  professional: UserProfessionalDto
 
   @Prop({ type: UserRecolocation })
   relocation: UserRecolocation

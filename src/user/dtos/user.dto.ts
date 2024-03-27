@@ -230,7 +230,7 @@ class UserSkillRankDto {
   public yearsOfExp: number
 }
 
-class UserProfessionalDto {
+export class UserProfessionalDto {
   @ApiProperty({
     type: String,
     enum: ProfessionType,
