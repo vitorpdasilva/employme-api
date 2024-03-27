@@ -235,7 +235,7 @@ export class User {
   @Prop({ type: [String] })
   jobsApplied: string[]
 
-  @Prop({ type: UserProfessionalSchema, default: [] })
+  @Prop({ type: [UserProfessionalSchema], default: [] })
   professional: UserProfessional[]
 
   @Prop({ type: UserRecolocation })
@@ -247,10 +247,10 @@ export class User {
   @Prop({ type: UserCulture })
   culture: UserCulture
 
-  @Prop({ type: UserSocialSchema, default: [] })
+  @Prop({ type: [UserSocialSchema], default: [] })
   social: UserSocial[]
 
-  @Prop({ type: UserEducationSchema, default: [] })
+  @Prop({ type: [UserEducationSchema], default: [] })
   education: UserEducation[]
 }
 
