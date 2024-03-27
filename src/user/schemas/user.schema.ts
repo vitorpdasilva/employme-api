@@ -77,7 +77,7 @@ class UserProfessional {
   skillsRank: UserSkillRank[]
 
   @Prop({ type: UserWorkExperience })
-  workExperiences: UserWorkExperience[] = []
+  workExperience: UserWorkExperience[] = []
 }
 
 @Schema({ _id: false })

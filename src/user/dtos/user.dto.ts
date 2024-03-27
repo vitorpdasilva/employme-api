@@ -264,7 +264,7 @@ class UserProfessionalDto {
     type: [UserWorkExperienceDto],
   })
   @Expose()
-  public workExperiences: UserWorkExperienceDto[]
+  public workExperience: UserWorkExperienceDto[]
 }
 
 export class ProfilePictureDto {
