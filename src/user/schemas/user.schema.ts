@@ -7,7 +7,7 @@ import {
   GenderType,
   SocialMedia,
 } from '../enums/user.enum'
-import { ProfilePictureDto, UserProfessionalDto } from '../dtos/user.dto'
+import { ProfilePictureDto } from '../dtos/user.dto'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -55,6 +55,32 @@ class UserSkillRank {
   @Prop({ type: Number })
   yearsOfExp: number
 }
+
+@Schema({ _id: false })
+class UserProfessional {
+  @Prop({
+    type: String,
+    enum: ProfessionType,
+  })
+  profession: ProfessionType
+
+  @Prop({ type: Number })
+  yearsOfExp: number
+
+  @Prop({ type: Boolean })
+  openToDiffRole: boolean
+
+  @Prop({ type: [String] })
+  preferencesToWork: string[]
+
+  @Prop({ type: UserSkillRank })
+  skillsRank: UserSkillRank[]
+
+  @Prop({ type: UserWorkExperience, default: [] })
+  workExperience: UserWorkExperience[]
+}
+
+const UserProfessionalSchema = SchemaFactory.createForClass(UserProfessional)
 
 @Schema({ _id: false })
 class UserRecolocation {
@@ -152,7 +178,7 @@ class UserSocial {
   @Prop({ type: String })
   url: string
 }
-const UserSocialSchema = SchemaFactory.createForClass(UserSocial)
+export const UserSocialSchema = SchemaFactory.createForClass(UserSocial)
 
 @Schema({ _id: false })
 class UserEducation {
@@ -175,7 +201,7 @@ class UserEducation {
   description: string
 }
 
-const UserEducationSchema = SchemaFactory.createForClass(UserEducation)
+export const UserEducationSchema = SchemaFactory.createForClass(UserEducation)
 
 @Schema()
 export class User {
@@ -209,8 +235,8 @@ export class User {
   @Prop({ type: [String] })
   jobsApplied: string[]
 
-  @Prop({ type: UserProfessionalDto })
-  professional: UserProfessionalDto
+  @Prop({ type: UserProfessionalSchema, default: [] })
+  professional: UserProfessional[]
 
   @Prop({ type: UserRecolocation })
   relocation: UserRecolocation
@@ -221,10 +247,10 @@ export class User {
   @Prop({ type: UserCulture })
   culture: UserCulture
 
-  @Prop({ type: UserSocial, default: [] })
+  @Prop({ type: UserSocialSchema, default: [] })
   social: UserSocial[]
 
-  @Prop({ type: UserEducation, default: [] })
+  @Prop({ type: UserEducationSchema, default: [] })
   education: UserEducation[]
 }
 

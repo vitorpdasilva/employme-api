@@ -33,7 +33,7 @@ class UserGeneralDto {
   public bio?: string
 }
 
-class UserEducationDto {
+export class UserEducationDto {
   @ApiProperty({ type: String })
   @Expose()
   public school: string
