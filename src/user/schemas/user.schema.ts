@@ -47,6 +47,9 @@ class UserWorkExperience {
   description: string
 }
 
+const UserWorkExperienceSchema =
+  SchemaFactory.createForClass(UserWorkExperience)
+
 @Schema({ _id: false })
 class UserSkillRank {
   @Prop({ type: String })
@@ -76,7 +79,7 @@ class UserProfessional {
   @Prop({ type: UserSkillRank })
   skillsRank: UserSkillRank[]
 
-  @Prop({ type: UserWorkExperience, default: [] })
+  @Prop({ type: [UserWorkExperienceSchema], default: [] })
   workExperience: UserWorkExperience[]
 }
 
@@ -235,8 +238,8 @@ export class User {
   @Prop({ type: [String] })
   jobsApplied: string[]
 
-  @Prop({ type: [UserProfessionalSchema], default: [] })
-  professional: UserProfessional[]
+  @Prop({ type: UserProfessionalSchema })
+  professional: UserProfessional
 
   @Prop({ type: UserRecolocation })
   relocation: UserRecolocation
