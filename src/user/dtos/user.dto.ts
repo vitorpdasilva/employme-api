@@ -69,7 +69,7 @@ class UserSocialDto {
   public url: string
 }
 
-class UserCultureDto {
+export class UserCultureDto {
   @ApiProperty({ type: String })
   @Expose()
   public lookingFor: string
@@ -83,7 +83,6 @@ class UserCultureDto {
   public motivatesMeMore: string
 
   @ApiProperty({
-    type: String,
     enumName: 'FiveYearsTrack',
     enum: FiveYearsTrack,
   })
@@ -91,7 +90,6 @@ class UserCultureDto {
   public fiveYearsCareerTrack: string
 
   @ApiProperty({
-    type: String,
     enumName: 'WorkEnvironmentType',
     enum: WorkEnvironmentType,
   })

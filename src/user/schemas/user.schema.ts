@@ -6,8 +6,9 @@ import {
   ProfessionType,
   GenderType,
   SocialMedia,
+  MotivationType,
 } from '../enums/user.enum'
-import { ProfilePictureDto } from '../dtos/user.dto'
+import { ProfilePictureDto, UserCultureDto } from '../dtos/user.dto'
 
 export type UserDocument = HydratedDocument<User>
 
@@ -159,21 +160,6 @@ class UserPreferences {
 }
 
 @Schema({ _id: false })
-class UserCulture {
-  @Prop({ type: String })
-  lookingFor: string
-
-  @Prop({ type: Number })
-  motivatesMeMore: number
-
-  @Prop({ type: Number })
-  fiveYearsCareerTrack: number
-
-  @Prop({ type: Number })
-  workBetterIn: number
-}
-
-@Schema({ _id: false })
 class UserSocial {
   @Prop({ type: String, enum: SocialMedia })
   name: SocialMedia
@@ -247,8 +233,8 @@ export class User {
   @Prop({ type: UserPreferences })
   preferences: UserPreferences
 
-  @Prop({ type: UserCulture })
-  culture: UserCulture
+  @Prop({ type: UserCultureDto })
+  culture: UserCultureDto
 
   @Prop({ type: [UserSocialSchema], default: [] })
   social: UserSocial[]
