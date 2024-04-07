@@ -1,5 +1,16 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Get,
+  Header,
+  Param,
+  Patch,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common'
 import { ApiOperation, ApiTags, ApiCreatedResponse } from '@nestjs/swagger'
+import { UploadedFile } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 import {
   RegisterUserInputDto,
   UpdateUserInputDto,
@@ -29,5 +40,28 @@ export class UserController {
     @Body() input: UpdateUserInputDto,
   ): Promise<UserWithTokensOutputDto> {
     return await this.service.update(id, input)
+  }
+
+  @ApiOperation({ description: 'Upload user resume' })
+  @ApiCreatedResponse({ type: UserWithTokensOutputDto })
+  @Post(':id/resume')
+  @UseInterceptors(FileInterceptor('file'))
+  public async uploadResume(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+  ): Promise<any> {
+    // Change any to UserWithTokensOutputDto late
+    // return await this.service.uploadResume(id, file)
+    this.service.saveResume(id, file)
+  }
+
+  @ApiOperation({ description: 'Get User Resume' })
+  @ApiCreatedResponse({ type: String })
+  @Get(':id/resume')
+  @Header('Content-Type', 'application/json')
+  @Header('Content-Disposition', 'attachment; filename="resume.pdf"')
+  public async getFile(): Promise<string> {
+    // return this.service.getFile()
+    return await Promise.resolve('temp-file')
   }
 }

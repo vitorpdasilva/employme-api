@@ -28,10 +28,7 @@ export class UserRepository {
   }
 
   public async create(user: RegisterUserDto): Promise<UserDto> {
-    console.log('user.repository.create', { user })
     const userSaved = (await new this.model(user).save()).toJSON()
-    console.log('user.repository.create', { userSaved })
-
     return plainToDto<UserDocument, UserDto>(UserDto, userSaved)
   }
 
@@ -47,5 +44,15 @@ export class UserRepository {
       { _id: user.id, jobsApplied: { $nin: jobId } },
       { $push: { jobsApplied: jobId } },
     )
+  }
+
+  public async saveResume(
+    id: string,
+    file: Express.Multer.File,
+  ): Promise<void> {
+    console.log('PASSED HEREEEEEE', { id, file })
+    const { filename, path } = file
+
+    await this.model.updateOne({ _id: id }, { resume: { filename, path } })
   }
 }

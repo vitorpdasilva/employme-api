@@ -15,7 +15,16 @@ import {
   SocialMedia,
 } from '../enums/user.enum'
 
-class UserGeneralDto {
+export class ResumeDto {
+  @ApiProperty({ type: String })
+  @Expose()
+  public filename: string
+
+  @ApiProperty({ type: Buffer })
+  @Expose()
+  public path: Buffer
+}
+export class UserGeneralDto {
   @ApiProperty({
     type: String,
     enumName: 'GenderType',
@@ -59,7 +68,7 @@ export class UserEducationDto {
   public description: string
 }
 
-class UserSocialDto {
+export class UserSocialDto {
   @ApiProperty({ type: String, enum: SocialMedia, enumName: 'SocialMedia' })
   @Expose()
   public name: SocialMedia
@@ -97,7 +106,7 @@ export class UserCultureDto {
   public workBetterIn: string
 }
 
-class UserRecolocationDto {
+export class UserRelocationDto {
   @ApiProperty({ type: String })
   @Expose()
   public openToRemote: boolean
@@ -151,7 +160,7 @@ class UserSalaryDto {
   public periodicity: string
 }
 
-class UserPreferencesDto {
+export class UserPreferencesDto {
   @ApiProperty({
     enum: JobSearchStatus,
     enumName: 'JobSearchStatus',
@@ -176,7 +185,7 @@ class UserPreferencesDto {
   public hideFromCompanies: string[]
 }
 
-class UserWorkExperienceDto {
+export class UserWorkExperienceDto {
   @ApiProperty({ type: String })
   @Expose()
   public id: string
@@ -326,7 +335,7 @@ export class UserDto {
 
   @ApiProperty({ description: 'Relocation User Info' })
   @Expose()
-  public relocation: UserRecolocationDto
+  public relocation: UserRelocationDto
 
   @ApiProperty({ description: 'Preferences User Info' })
   @Expose()

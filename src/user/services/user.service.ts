@@ -92,4 +92,9 @@ export class UserService {
   public async updateAppliedJob(user: UserDto, jobId: string): Promise<void> {
     await this.repository.updateAppliedJob(user, jobId)
   }
+
+  public async saveResume(id, resume: Express.Multer.File): Promise<any> {
+    console.warn('====', 'passed here', '====')
+    await this.repository.saveResume(id, resume)
+  }
 }
