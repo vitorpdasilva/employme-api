@@ -68,18 +68,27 @@ export class UserService {
     }
   }
 
-  public async update(id: string, userInput: UpdateUserInputDto): Promise<any> {
+  public async update(
+    id: string,
+    userInput: UpdateUserInputDto,
+  ): Promise<UserWithTokensOutputDto> {
     const userFound = await this.repository.findById(id)
     if (!userFound) {
       throw new NotFoundException('User not exists')
     }
     await this.repository.update(id, userInput)
-    // todo: fix this for the god's sake
+
+    const tokens = await this.tokenService.generate({
+      email: userFound.email,
+      sub: userFound.id,
+    })
+
     return {
       userData: {
         ...userFound,
         ...userInput,
       },
+      tokens,
     }
   }
 
@@ -93,8 +102,12 @@ export class UserService {
     await this.repository.updateAppliedJob(user, jobId)
   }
 
-  public async saveResume(id, resume: Express.Multer.File): Promise<any> {
-    console.warn('====', 'passed here', '====')
+  public async saveResume(
+    id: string,
+    resume: Express.Multer.File,
+  ): Promise<UserDto> {
     await this.repository.saveResume(id, resume)
+    const user = await this.repository.findById(id)
+    return user
   }
 }

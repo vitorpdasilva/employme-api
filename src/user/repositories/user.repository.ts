@@ -50,9 +50,7 @@ export class UserRepository {
     id: string,
     file: Express.Multer.File,
   ): Promise<void> {
-    console.log('PASSED HEREEEEEE', { id, file })
     const { filename, path } = file
-
     await this.model.updateOne({ _id: id }, { resume: { filename, path } })
   }
 }
