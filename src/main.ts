@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
-import { Logger } from '@nestjs/common'
+import { Logger, ValidationPipe } from '@nestjs/common'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { EmployMeModule } from './employme/employme.module'
 
@@ -17,6 +17,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('swagger', app, document, { swaggerUrl: '/json' })
   app.enableCors()
+  app.useGlobalPipes(new ValidationPipe())
   app.setGlobalPrefix('/api')
   await app.listen(PORT)
 }

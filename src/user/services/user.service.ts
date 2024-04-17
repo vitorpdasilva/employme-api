@@ -105,9 +105,18 @@ export class UserService {
   public async saveResume(
     id: string,
     resume: Express.Multer.File,
-  ): Promise<UserDto> {
+  ): Promise<UserWithTokensOutputDto> {
+    console.log('user.service', 'saveResume', resume)
     await this.repository.saveResume(id, resume)
     const user = await this.repository.findById(id)
-    return user
+    const tokens = await this.tokenService.generate({
+      email: user.email,
+      sub: user.id,
+    })
+
+    return {
+      userData: user,
+      tokens,
+    }
   }
 }

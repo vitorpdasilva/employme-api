@@ -49,10 +49,9 @@ export class UserController {
   public async uploadResume(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<any> {
-    // Change any to UserWithTokensOutputDto late
-    // return await this.service.uploadResume(id, file)
-    this.service.saveResume(id, file)
+  ): Promise<UserWithTokensOutputDto> {
+    console.log('user.controller', 'id/resume', file)
+    return this.service.saveResume(id, file)
   }
 
   @ApiOperation({ description: 'Get User Resume' })

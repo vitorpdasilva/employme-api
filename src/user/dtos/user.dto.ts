@@ -14,6 +14,7 @@ import {
   ProfessionType,
   SocialMedia,
 } from '../enums/user.enum'
+import { Schema } from '@nestjs/mongoose'
 
 export class ResumeDto {
   @ApiProperty({ type: String })
@@ -24,6 +25,7 @@ export class ResumeDto {
   @Expose()
   public path: Buffer
 }
+
 export class UserGeneralDto {
   @ApiProperty({
     type: String,
@@ -146,7 +148,7 @@ export class UserRelocationDto {
   public noticePeriod: string
 }
 
-class UserSalaryDto {
+export class UserSalaryDto {
   @ApiProperty({ type: String })
   @Expose()
   public currency: string
@@ -223,7 +225,7 @@ export class UserWorkExperienceDto {
   public description: string
 }
 
-class UserSkillRankDto {
+export class UserSkillRankDto {
   @ApiProperty({
     type: String,
     enum: TechAndLanguagesAndTools,
