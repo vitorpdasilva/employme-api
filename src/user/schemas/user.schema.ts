@@ -15,7 +15,6 @@ import {
   UserCultureDto,
   UserSalaryDto,
   UserEducationDto,
-  UserWorkExperienceDto,
 } from '../dtos/user.dto'
 
 export type UserDocument = HydratedDocument<User>

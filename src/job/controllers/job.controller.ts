@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
 import { JobService } from '../services/job.service'
-import { JobDto } from '../dtos/job.dto'
+import { JobDto, ApplyToJobDto } from '../dtos/job.dto'
 import { RegisterJobInputDto } from '../dtos/register-job.dto'
 
 @ApiTags('Jobs')
@@ -47,9 +47,9 @@ export class JobController {
   @Post(':id/apply')
   public async apply(
     @Param('id') id: string,
-    @Body('applicantId') applicantId: string,
+    @Body() params: ApplyToJobDto,
   ): Promise<JobDto> {
-    console.log('params', id, applicantId)
-    return this.service.apply(id, applicantId)
+    console.log('params', id, params.applicantId)
+    return this.service.apply(id, params.applicantId)
   }
 }

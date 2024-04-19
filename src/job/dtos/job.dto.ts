@@ -74,3 +74,9 @@ export class JobDto {
   @Expose()
   salary: SalaryDto
 }
+
+export class ApplyToJobDto {
+  @ApiProperty({ type: String })
+  @Expose()
+  applicantId: string
+}
