@@ -6,10 +6,10 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common'
 import { ApiOperation, ApiTags, ApiCreatedResponse } from '@nestjs/swagger'
-import { UploadedFile } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
 import {
   RegisterUserInputDto,
@@ -49,9 +49,9 @@ export class UserController {
   public async uploadResume(
     @Param('id') id: string,
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<UserWithTokensOutputDto> {
+  ): Promise<void> {
     console.log('user.controller', 'id/resume', file)
-    return this.service.saveResume(id, file)
+    await this.service.saveResume(id, file)
   }
 
   @ApiOperation({ description: 'Get User Resume' })
