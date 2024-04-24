@@ -7,7 +7,7 @@ import { UserRepository } from './repositories/user.repository'
 import { User, UserSchema } from './schemas/user.schema'
 import { SharedModule } from '../shared/shared.module'
 import { ConfigModule } from '@nestjs/config'
-import { MulterConfigService } from 'src/shared/services/multer.service'
+import { MulterConfigService } from '../shared/services/multer.service'
 
 @Module({
   imports: [
