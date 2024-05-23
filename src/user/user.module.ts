@@ -16,7 +16,7 @@ import { MulterConfigService } from '../shared/services/multer.service'
     MulterModule.registerAsync({
       imports: [ConfigModule],
       useClass: MulterConfigService,
-    })
+    }),
   ],
   providers: [UserService, UserRepository],
   controllers: [UserController],

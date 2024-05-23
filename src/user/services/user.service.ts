@@ -14,6 +14,7 @@ import {
   UserWithTokensOutputDto,
 } from '../dtos/register-user.dto'
 import { UserDto } from '../dtos/user.dto'
+import { UserType } from '../enums/user.enum'
 
 @Injectable()
 export class UserService {
@@ -42,7 +43,7 @@ export class UserService {
     userInput: RegisterUserInputDto,
   ): Promise<UserWithTokensOutputDto> {
     try {
-      const { email, password, name } = userInput
+      const { email, password, name, userType = UserType.CANDIDATE } = userInput
       const userFound = await this.repository.findOneByEmail(email)
       if (userFound) {
         throw new ConflictException('User already exists')
@@ -50,6 +51,7 @@ export class UserService {
       const user: RegisterUserDto = {
         email,
         name,
+        userType,
         passwordHash: bcrypt.hashSync(password, 9),
       }
       const userSaved = await this.repository.create(user)
@@ -107,6 +109,6 @@ export class UserService {
     resume: Express.Multer.File,
   ): Promise<void> {
     console.log('user.service', 'saveResume', resume)
-    await this.repository.saveResume(id, resume)    
+    await this.repository.saveResume(id, resume)
   }
 }

@@ -305,7 +305,7 @@ export class UserDto {
     enum: UserType,
   })
   @Expose()
-  public type: UserType
+  public userType?: UserType
 
   @ApiProperty({ description: 'Name' })
   @Expose()

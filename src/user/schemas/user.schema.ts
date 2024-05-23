@@ -218,7 +218,7 @@ export class User {
   accessCount: number
 
   @Prop({ type: String, enum: UserType, default: UserType.CANDIDATE })
-  type: UserType
+  userType: UserType
 
   @Prop({ type: UserGeneralSchema })
   general: UserGeneral
