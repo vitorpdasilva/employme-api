@@ -14,7 +14,6 @@ import {
   ProfessionType,
   SocialMedia,
 } from '../enums/user.enum'
-import { Schema } from '@nestjs/mongoose'
 
 export class ResumeDto {
   @ApiProperty({ type: String })
@@ -300,6 +299,7 @@ export class UserDto {
   public passwordHash: string
 
   @ApiProperty({
+    required: false,
     description: 'UserType',
     enumName: 'UserType',
     enum: UserType,
