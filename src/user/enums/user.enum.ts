@@ -104,7 +104,7 @@ export enum CurrencyType {
 export enum CompanySize {
   SEED = 'Seed',
   EARLY = 'Early',
-  MID_SIZE = 'Mid-size',
+  MID_SIZE = 'Mid size',
   LARGE = 'Large',
   VERY_LARGE = 'Very Large',
   MASSIVE = 'Massive',

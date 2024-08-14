@@ -134,7 +134,7 @@ export class UserRelocationDto {
   @Expose()
   public validPassport: boolean
 
-  @ApiProperty({ type: String, enum: [CompanySize], enumName: 'CompanySize' })
+  @ApiProperty({ type: String, enum: CompanySize, enumName: 'CompanySize' })
   @Expose()
   public companySize: string[] = []
 
@@ -175,7 +175,7 @@ export class UserPreferencesDto {
 
   @ApiProperty({
     type: String,
-    enum: [CompanySize],
+    enum: CompanySize,
     enumName: 'CompanySize',
   })
   @Expose()

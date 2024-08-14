@@ -56,7 +56,7 @@ export class UserRelocation {
   @Prop({ type: Boolean })
   validPassport: boolean
 
-  @Prop({ type: String, enum: [CompanySize], enumName: 'CompanySize' })
+  @Prop({ type: String, enum: CompanySize, enumName: 'CompanySize' })
   companySize: string[] = []
 
   @Prop({ type: Boolean })
@@ -79,7 +79,7 @@ class UserPreferences {
 
   @Prop({
     type: String,
-    enum: [CompanySize],
+    enum: CompanySize,
     enumName: 'CompanySize',
   })
   companySize: string[] = []

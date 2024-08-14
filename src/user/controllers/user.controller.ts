@@ -54,13 +54,13 @@ export class UserController {
     await this.service.saveResume(id, file)
   }
 
-  @ApiOperation({ description: 'Get User Resume' })
-  @ApiCreatedResponse({ type: String })
-  @Get(':id/resume')
-  @Header('Content-Type', 'application/json')
-  @Header('Content-Disposition', 'attachment; filename="resume.pdf"')
-  public async getFile(): Promise<string> {
-    // return this.service.getFile()
-    return await Promise.resolve('temp-file')
-  }
+  // @ApiOperation({ description: 'Get User Resume' })
+  // @ApiCreatedResponse({ type: String })
+  // @Get(':id/resume')
+  // @Header('Content-Type', 'application/json')
+  // @Header('Content-Disposition', 'attachment; filename="resume.pdf"')
+  // public async getFile(): Promise<string> {
+  //   // return this.service.getFile()
+  //   return await Promise.resolve('temp-file')
+  // }
 }
